@@ -46,6 +46,12 @@ module.exports = function(grunt) {
         eqnull: true
       }
     },
+    cucumberjs: {
+      src: "features",
+      options: {
+        steps: "features/step_definitions"
+      }
+    },
     requirejs: {
       debug: {
         options: extend(getRequirejsConfig(), {
@@ -68,7 +74,8 @@ module.exports = function(grunt) {
     'grunt-contrib-jshint',
     'grunt-contrib-clean',
     'grunt-contrib-sass',
-    'grunt-contrib-requirejs'
+    'grunt-contrib-requirejs',
+    'grunt-cucumber'
   ].forEach(function (task) {
     grunt.loadNpmTasks(task);
   });
