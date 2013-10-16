@@ -48,6 +48,8 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 
   app.get('/stagecraft-stub/*', requirejs('../support/stagecraft_stub/stagecraft_stub_controller'));
+
+  app.get('/backdrop-stub/*', requirejs('../support/stagecraft_stub/stagecraft_stub_controller'));
 });
 
 
