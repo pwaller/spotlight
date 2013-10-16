@@ -1,14 +1,12 @@
-define(['test/spec/app/test-helper.js'], function (Requester) {
+define(['/test/spec/app/requester.js', 'require', 'server'], function (Requester, require) {
+  var app = require('server');
 
   var TestHelper = {
 
     withServer: function(callback) {
-      var app, stopServer;
-      asyncSpecWait();
-      app = require("app/server.js").app;
+      var stopServer;
       stopServer = function() {
         app.close();
-        return asyncSpecDone();
       };
       app.listen(3000);
       return callback(new Requester, stopServer);
