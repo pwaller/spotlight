@@ -1,16 +1,30 @@
 define([
   'stagecraft_api_client',
-  'common/views/govuk'
+  'common/views/govuk',
+  'common/views/raw'
 ],
-function (StagecraftApiClient, GovUkView) {
+function (StagecraftApiClient, GovUkView, RawView) {
+
+  var setUpView = function (req, model) {
+    if (req.param('raw')) {
+      return new RawView({
+        requirePath: req.app.get('requirePath'),
+        assetPath: req.app.get('assetPath'),
+        environment: req.app.get('environment'),
+        model: model
+      });
+    } else {
+      return new GovUkView({
+        requirePath: req.app.get('requirePath'),
+        assetPath: req.app.get('assetPath'),
+        environment: req.app.get('environment'),
+        model: model
+      });
+    };
+  };
 
   var renderContent = function (req, res, model) {
-    var content = new GovUkView({
-      requirePath: req.app.get('requirePath'),
-      assetPath: req.app.get('assetPath'),
-      environment: req.app.get('environment'),
-      model: model
-    });
+    var content = setUpView(req, model); 
 
     content.once('postrender', function () {
       res.send(content.html);

@@ -1,14 +1,19 @@
 define([
   'render',
   'extensions/models/model',
-  'common/views/govuk'
+  'common/views/govuk',
+  'common/views/raw'
 ],
-function (render, Model, GovUkView) {
+function (render, Model, GovUkView, RawView) {
   describe("render middleware", function () {
 
-    var req, res, environment;
+    var req, res, environment, params;
     beforeEach(function() {
       environment = 'development';
+      params = {
+        'service': 'licensing',
+        'api_name': 'realtime'
+      };
       var get = jasmine.createSpy();
       get.plan = function (id) {
         return {
@@ -21,6 +26,9 @@ function (render, Model, GovUkView) {
       req = {
         app: {
           get: get
+        },
+        param: function(key) {
+          return params[key];
         }
       };
       res = {
@@ -93,15 +101,6 @@ function (render, Model, GovUkView) {
         render.renderContent(req, res, model);
       });
 
-      it("instantiates a GovUkView", function () {
-        var contentView = render.renderContent(req, res, model);
-        expect(contentView.requirePath).toEqual('/testRequirePath');
-        expect(contentView.assetPath).toEqual('/testAssetPath');
-        expect(contentView.environment).toEqual('development');
-        expect(contentView.model).toBe(model);
-        expect(contentView.render).toHaveBeenCalled();
-      });
-
       it("sends a response once content is rendered", function () {
         var contentView = render.renderContent(req, res, model);
         contentView.html = 'test content';
@@ -113,6 +112,36 @@ function (render, Model, GovUkView) {
         expect(res.send.callCount).toEqual(1);
         expect(res.send.argsForCall[0][0]).toEqual('test content');
       });
+
+      describe("when the view is not raw", function() {
+        it("instantiates a GovUkView", function () {
+          var contentView = render.renderContent(req, res, model);
+          expect(contentView.requirePath).toEqual('/testRequirePath');
+          expect(contentView.assetPath).toEqual('/testAssetPath');
+          expect(contentView.environment).toEqual('development');
+          expect(contentView.model).toBe(model);
+          expect(contentView.render).toHaveBeenCalled();
+        });
+      });
+
+      describe("when the view is raw", function() {
+        beforeEach(function() {
+          params['raw'] = true;
+          spyOn(RawView.prototype, "render");
+        });
+
+        it("instantiates a RawView", function () {
+          var contentView = render.renderContent(req, res, model);
+          expect(contentView.requirePath).toEqual('/testRequirePath');
+          expect(contentView.assetPath).toEqual('/testAssetPath');
+          expect(contentView.environment).toEqual('development');
+          expect(contentView.model).toBe(model);
+          expect(contentView.render).toHaveBeenCalled();
+          expect(contentView instanceof RawView).toBe(true);
+          expect(contentView instanceof GovUkView).toBe(false);
+        });
+      });
+
     });
   });
 });
