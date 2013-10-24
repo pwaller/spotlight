@@ -20,7 +20,7 @@ function (StagecraftApiClient, GovUkView, RawView) {
         environment: req.app.get('environment'),
         model: model
       });
-    };
+    }
   };
 
   var renderContent = function (req, res, model) {
