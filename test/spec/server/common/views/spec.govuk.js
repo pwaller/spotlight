@@ -1,9 +1,11 @@
 define([
   'common/views/govuk',
   'extensions/models/model',
+  'stache!common/templates/raw_template',
+  'stache!common/templates/govuk_template',
   'extensions/views/view'
 ],
-function (GovUkView, Model, View) {
+function (GovUkView, Model, rawTemplate, govukTemplate, View) {
   describe("GovUkView", function () {
     it("renders a page with a content view in GOV.UK style", function (done) {
 
@@ -24,6 +26,8 @@ function (GovUkView, Model, View) {
         model: model
       });
 
+      expect(view.template()).toEqual(govukTemplate());
+      expect(view.template()).not.toEqual(rawTemplate());
       spyOn(view, "template").andReturn('rendered')
 
       view.on('postrender', function () {
