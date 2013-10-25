@@ -1,16 +1,18 @@
 define([
   'extensions/views/view',
   'common/views/header',
-  'stache!common/templates/dashboard'
+  'common/views/visualisation',
+  'stache!common/templates/module'
 ],
-function (View, HeaderView, template) {
-  var DashboardView = View.extend({
+function (View, HeaderView, VisualisationView, template) {
+  var ModuleView = View.extend({
     template: template,
 
     views: {
-      header: HeaderView
+      header: HeaderView,
+      visualisation: VisualisationView
     }
   });
 
-  return DashboardView;
+  return ModuleView;
 });

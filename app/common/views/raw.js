@@ -1,11 +1,10 @@
 define([
   'extensions/views/view',
   'stache!common/templates/raw_template',
-  'stache!common/templates/content',
   'stache!common/templates/head',
   'stache!common/templates/body-end'
 ],
-function (View, rawTemplate, contentTemplate, headTemplate, bodyEndTemplate) {
+function (View, rawTemplate, headTemplate, bodyEndTemplate) {
 
   var RawView = View.extend({
     template: rawTemplate,
@@ -16,9 +15,7 @@ function (View, rawTemplate, contentTemplate, headTemplate, bodyEndTemplate) {
         model: this.model
       });
       content.once('postrender', function () {
-        context.content = contentTemplate({
-          content: this.content.$el.html()
-        });
+        context.content = this.content.$el.html();
         this.html = this.template(context);
         this.trigger('postrender');
       }, this);
@@ -29,7 +26,8 @@ function (View, rawTemplate, contentTemplate, headTemplate, bodyEndTemplate) {
       var baseContext = {
         requirePath: this.requirePath,
         assetPath: this.assetPath,
-        development: this.environment === 'development'
+        development: this.environment === 'development',
+        not_raw: true
       };
 
       return _.extend(

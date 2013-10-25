@@ -40,7 +40,7 @@ function (RawView, Model, rawTemplate, govukTemplate, View) {
         expect(context.bodyEnd.trim()).toEqual('<script data-main="&#x2F;testRequirePath&#x2F;client.js" src="&#x2F;testRequirePath&#x2F;vendor/require.js" type="text/javascript"></script>');
 
         var content = context.content.replace(/\s+/g, ' ').trim();
-        expect(content).toEqual('<section id="content"> <div class="performance-platform-outer"> test_content </div> </section>');
+        expect(content).toEqual('test_content');
         done();
       });
 
