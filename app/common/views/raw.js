@@ -15,7 +15,9 @@ function (View, rawTemplate, headTemplate, bodyEndTemplate) {
         model: this.model
       });
       content.once('postrender', function () {
-        context.content = this.content.$el.html();
+        //this doesn't work here as rendering to mustache, not to element, fix this
+        //context.content = this.content.$el.html();
+        context.content = this.content.html;
         this.html = this.template(context);
         this.trigger('postrender');
       }, this);
@@ -27,7 +29,7 @@ function (View, rawTemplate, headTemplate, bodyEndTemplate) {
         requirePath: this.requirePath,
         assetPath: this.assetPath,
         development: this.environment === 'development',
-        not_raw: true
+        not_raw: false
       };
 
       return _.extend(
