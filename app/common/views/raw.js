@@ -9,6 +9,11 @@ function (View, rawTemplate, headTemplate, bodyEndTemplate) {
   var RawView = View.extend({
     template: rawTemplate,
 
+    //views will no longer be asyncronous
+    //only async will be
+    //- waiting for stagecraft
+    //waiting for module data
+    //waiting for dashboard modules
     render: function () {
       var context = this.templateContext();
       var content = this.content = new (this.model.get('view'))({
