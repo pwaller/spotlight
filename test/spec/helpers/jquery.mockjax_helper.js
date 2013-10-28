@@ -1,5 +1,7 @@
+var jsdom = require("jsdom").jsdom;
+var doc = jsdom();
+var window = doc.parentWindow;
 jQuery = require('jquery');
-
 /*!
  * MockJax - jQuery Plugin to Mock Ajax requests
  *
