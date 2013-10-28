@@ -1,8 +1,9 @@
 def values
   {
-    'realtime' => {
-      'licensing' => {
-        raw: 11, extra_info: ""
+    realtime: {
+      licensing: {
+        extra_info: 'Real-time usage',
+        raw: 11
       }
     }
   }

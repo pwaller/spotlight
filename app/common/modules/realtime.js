@@ -1,30 +1,34 @@
 define([
-  'extensions/views/view',
+  'extensions/controllers/module_controller',
   'stache!common/templates/visualisation'
 ],
-function (View, template) {
-  var VisualisationView = View.extend({
-    template: template,
+function (ModuleController, template) {
+  var Realtime = ModuleController.extend({
 
-    html: function () { return "some html"; }
+    initialize: function (options) {
+      console.log(options);
+    },
 
-//    var updateInterval = 120 * 1000;
+    render: function () {
+      this.trigger('postrender');
+    },
+
+    html: function () {
+      return "<some html>";
+    }
+
 //    var visitorsRealtimeCollection = new VisitorsRealtimeCollection([],{
 //    serviceName: "licensing"
 //    });
 //
 //    var visitorsRealtimeView = new VisitorsRealtimeView({
 //    el: $('#number-of-visitors-realtime'),
-//    collection: visitorsRealtimeCollection,
-//    collectionUpdateInterval: updateInterval
+//    collection: visitorsRealtimeCollection
 //    });
 //
 //    visitorsRealtimeCollection.fetch();
 //
-//    setInterval(function () {
-//    visitorsRealtimeCollection.fetch();
-//    }, updateInterval);
   });
 
-  return VisualisationView;
+  return Realtime;
 });

@@ -20,7 +20,7 @@ function (View, rawTemplate, headTemplate, bodyEndTemplate) {
         model: this.model
       });
       content.once('postrender', function () {
-        context.content = this.content.$el.html();
+        context.content = this.content.html;
         this.html = this.template(context);
         this.trigger('postrender');
       }, this);
@@ -32,7 +32,7 @@ function (View, rawTemplate, headTemplate, bodyEndTemplate) {
         requirePath: this.requirePath,
         assetPath: this.assetPath,
         development: this.environment === 'development',
-        raw: false
+        raw: true
       };
 
       return _.extend(
