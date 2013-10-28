@@ -50,6 +50,7 @@ module.exports = function(grunt) {
       spotlight: {
         src: 'app/**/*.js',
         options: {
+          helpers: ['test/spec/helpers/moment_helper.js', 'test/spec/helpers/jquery.mockjax.js'],
           specs: 'test/spec/shared/**/spec.*.js',
           template: 'test/spec/index.html',
           keepRunner: true
@@ -79,7 +80,7 @@ module.exports = function(grunt) {
             format: 'progress',
             tags: ['~@wip']
         }
-    },    
+    },
     jshint: {
       files: "app/**/*.js",
       options: {
@@ -151,7 +152,7 @@ module.exports = function(grunt) {
       }
     }
   });
-  
+
   [
     'grunt-contrib-jasmine',
     'grunt-jasmine-node',
@@ -167,7 +168,7 @@ module.exports = function(grunt) {
   ].forEach(function (task) {
     grunt.loadNpmTasks(task);
   });
-  
+
   // Default task.
   grunt.registerTask('build:development', [
     'copy:govuk_template', 'jshint', 'clean', 'copy:govuk_assets', 'sass:development'

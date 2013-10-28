@@ -1,8 +1,9 @@
 define([
-  'extensions/controllers/module_controller',
-  'stache!common/templates/visualisation'
+  'extensions/controllers/module_controller'//,
+  // 'extensions/collections/visitors-realtime',
+  // 'extensions/views/visitors-realtime'
 ],
-function (ModuleController, template) {
+function (ModuleController) {
   var Realtime = ModuleController.extend({
 
     render: function () {
