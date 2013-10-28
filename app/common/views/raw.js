@@ -20,7 +20,7 @@ function (View, rawTemplate, headTemplate, bodyEndTemplate) {
         model: this.model
       });
       content.once('postrender', function () {
-        context.content = this.content.html;
+        context.content = this.content.html();
         this.html = this.template(context);
         this.trigger('postrender');
       }, this);

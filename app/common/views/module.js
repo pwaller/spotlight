@@ -18,11 +18,15 @@ function (View, HeaderView, template, ModuleMap) {
       var context = this.templateContext();
       var visualisation = this.visualisation = this.module();
       visualisation.once('postrender', function () {
-        context.visualisation = this.visualisation.$el.html();
-        this.html = this.template(context);
+        context.visualisation = this.visualisation.html();
+        this.the_html = this.template(context);
         this.trigger('postrender');
       }, this);
       visualisation.render();
+    },
+
+    html: function () {
+      return this.the_html;
     },
 
     module: function() {

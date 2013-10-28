@@ -21,7 +21,7 @@ function (View, govukTemplate, contentTemplate, headTemplate, bodyEndTemplate) {
       });
       content.once('postrender', function () {
         context.content = contentTemplate({
-          content: this.content.$el.html()
+          content: this.content.html()
         });
         this.html = this.template(context);
         this.trigger('postrender');

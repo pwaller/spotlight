@@ -10,6 +10,7 @@ function (View, HeaderView, template) {
     views: {
       header: HeaderView
     }
+
   });
 
   return DashboardView;

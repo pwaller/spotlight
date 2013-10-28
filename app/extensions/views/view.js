@@ -7,14 +7,18 @@ define([
 ],
 function (Backbone, moment, Modernizr, $, _) {
     var View = Backbone.View.extend({
-      
+
       moment: moment,
       modernizr: Modernizr,
-    
+
       initialize: function (options) {
         _.extend(this, options);
         this.viewInstances = {};
         Backbone.View.prototype.initialize.apply(this, arguments);
+      },
+
+      html: function () {
+        return this.$el.html();
       },
 
       make: function(tagName, attributes, content) {
@@ -36,7 +40,7 @@ function (Backbone, moment, Modernizr, $, _) {
           this.trigger('postrender');
         }, this));
       },
-      
+
       renderContent: function (options) {
         options = options || {};
         if (this.template) {
@@ -64,14 +68,14 @@ function (Backbone, moment, Modernizr, $, _) {
       },
 
       renderSubviews: function (options, callback) {
-        
+
         var remaining = 0;
         var subviewReady = function () {
           if (--remaining <= 0) {
             callback();
           }
         };
-        
+
         var viewsDefinition = this.views;
         if (_.isFunction(viewsDefinition)) {
           viewsDefinition = viewsDefinition();
@@ -83,13 +87,13 @@ function (Backbone, moment, Modernizr, $, _) {
             console.warn('No element found for ' + selector);
             return;
           }
-          
+
           var view,
               options = this.defaultSubviewOptions();
 
           $el.empty();
           options.$el = $el;
-          
+
           if (typeof definition === 'function') {
             view = definition;
           } else if (_.isObject(definition)) {
@@ -117,18 +121,18 @@ function (Backbone, moment, Modernizr, $, _) {
             remaining++;
           }
         }, this);
-        
+
         if (!remaining) {
           callback();
         }
       },
-      
+
       views: {},
-      
+
       keys: {
         escape: 27
       },
-      
+
       magnitudes: {
           million:  {value: 1e6, threshold: 499500, suffix:"m"},
           thousand: {value: 1e3, threshold: 499.5,  suffix:"k"},
@@ -167,7 +171,7 @@ function (Backbone, moment, Modernizr, $, _) {
         } else {
           decimalPlaces = values.every(isAnExactMultipleOf(magnitude.value))? 0 : 1;
         }
-        
+
         var format = this.format;
         return function(value) {
           if (value === 0) return "0";
@@ -355,7 +359,7 @@ function (Backbone, moment, Modernizr, $, _) {
           var seconds = millisecondsToSeconds(milliseconds);
           var secondsWithPrecision = roundWithPrecision(seconds, 1);
           if(visualLength(secondsWithPrecision) > maxLength){
-            return Math.round(seconds) + 's';        
+            return Math.round(seconds) + 's';
           }
           else{
             return secondsWithPrecision + 's';
@@ -366,7 +370,7 @@ function (Backbone, moment, Modernizr, $, _) {
         }
 
       },
-    
+
       /**
        * Convenience method, gets object property or method result. The method
        * is passed no arguments and is executed in the object context.

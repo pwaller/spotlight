@@ -7,7 +7,7 @@ function (RealtimeModule) {
     it("should return some HTML containing a number", function () {
       var realtime = new RealtimeModule();
       realtime.render();
-      expect(realtime.html()).toEqual('<some html>');
+      expect(realtime.html()).toEqual('12');
     });
   });
 

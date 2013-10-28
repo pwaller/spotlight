@@ -5,16 +5,12 @@ define([
 function (ModuleController, template) {
   var Realtime = ModuleController.extend({
 
-    initialize: function (options) {
-      console.log(options);
-    },
-
     render: function () {
       this.trigger('postrender');
     },
 
     html: function () {
-      return "<some html>";
+      return "12";
     }
 
 //    var visitorsRealtimeCollection = new VisitorsRealtimeCollection([],{
