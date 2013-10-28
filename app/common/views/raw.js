@@ -32,7 +32,7 @@ function (View, rawTemplate, headTemplate, bodyEndTemplate) {
         requirePath: this.requirePath,
         assetPath: this.assetPath,
         development: this.environment === 'development',
-        not_raw: true
+        raw: false
       };
 
       return _.extend(
