@@ -53,6 +53,7 @@ function (View) {
         Math.round(this.currentNumberOfVisitors || parseFloat(this.collection.at(0).get("unique_visitors")));
 
       this.html = '<p class="impact-number"><strong>' + numberOfVisitors + '</strong></p> <p class="stat-description">user' + ( numberOfVisitors == 1 ? "" : "s") + " online now</p>";
+      this.$el.html(this.html);
       this.trigger('postrender');
     }
   });

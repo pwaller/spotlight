@@ -16,7 +16,7 @@ function (ModuleController, VisitorsRealtimeView, VisitorsRealtimeCollection) {
         collection: visitorsRealtimeCollection
       });
       visitorsRealtimeView.once('postrender', function () {
-        this.the_html = visitorsRealtimeView.html; 
+        this.the_html = visitorsRealtimeView.html;
         this.trigger('postrender');
       }, this);
 
@@ -24,7 +24,7 @@ function (ModuleController, VisitorsRealtimeView, VisitorsRealtimeCollection) {
     },
 
     html: function () {
-      return this.the_html; 
+      return this.the_html;
     }
 
   });

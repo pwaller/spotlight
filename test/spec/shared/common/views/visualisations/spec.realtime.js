@@ -46,7 +46,7 @@ function (VisitorsRealtimeView, Collection) {
           collection: collection
         });
         jasmine.renderView(view, function () {
-          collection.trigger('reset');
+          collection.trigger('sync');
           expect(view.$el.find('strong')).toHaveHtml('10');
           jasmine.Clock.tick(view.updateInterval);
           // first tick
@@ -71,7 +71,7 @@ function (VisitorsRealtimeView, Collection) {
           collection: collection
         });
         jasmine.renderView(view, function () {
-          collection.trigger('reset');
+          collection.trigger('sync');
         });
       });
     });
