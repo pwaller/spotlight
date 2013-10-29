@@ -1,30 +1,32 @@
 define([
-  'extensions/controllers/module_controller'//,
-  // 'extensions/collections/visitors-realtime',
-  // 'extensions/views/visitors-realtime'
+  'extensions/controllers/module_controller',
+  'common/views/visualisations/realtime',
+  'common/collections/visitors-realtime'
 ],
-function (ModuleController) {
+function (ModuleController, VisitorsRealtimeView, VisitorsRealtimeCollection) {
   var Realtime = ModuleController.extend({
 
     render: function () {
-      this.trigger('postrender');
+      var visitorsRealtimeCollection = new VisitorsRealtimeCollection([],{
+        serviceName: "licensing"
+      });
+
+      var visitorsRealtimeView = new VisitorsRealtimeView({
+        el: $('#number-of-visitors-realtime'),
+        collection: visitorsRealtimeCollection
+      });
+      visitorsRealtimeView.once('postrender', function () {
+        this.the_html = visitorsRealtimeView.html; 
+        this.trigger('postrender');
+      }, this);
+
+      visitorsRealtimeCollection.fetch();
     },
 
     html: function () {
-      return "12";
+      return this.the_html; 
     }
 
-//    var visitorsRealtimeCollection = new VisitorsRealtimeCollection([],{
-//    serviceName: "licensing"
-//    });
-//
-//    var visitorsRealtimeView = new VisitorsRealtimeView({
-//    el: $('#number-of-visitors-realtime'),
-//    collection: visitorsRealtimeCollection
-//    });
-//
-//    visitorsRealtimeCollection.fetch();
-//
   });
 
   return Realtime;

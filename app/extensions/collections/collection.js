@@ -10,7 +10,7 @@ define([
 function (Backbone, Model, Query, SafeSync, DateRange, moment, $) {
 
   // get base URL for Backdrop instance (with trailing slash if missing)
-  var baseUrl = $('#wrapper').data('backdrop-url');
+  var baseUrl = "http://localhost:3057/"
   if (baseUrl) {
     baseUrl = baseUrl.replace(/\/?$/, '/');
   }
@@ -166,7 +166,7 @@ function (Backbone, Model, Query, SafeSync, DateRange, moment, $) {
         }
       });
 
-      return this.baseUrl + 'performance/' + this.serviceName + '/api/' + this.apiName +'?' + $.param(params, true);
+      return this.baseUrl + 'backdrop-stub/' + this.serviceName + '/api/' + this.apiName +'?' + $.param(params, true);
     },
 
     /**
