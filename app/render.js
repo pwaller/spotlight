@@ -6,25 +6,21 @@ define([
 function (StagecraftApiClient, GovUkView, RawView) {
 
   var setUpView = function (req, model) {
+    var viewOptions = {
+      requirePath: req.app.get('requirePath'),
+      assetPath: req.app.get('assetPath'),
+      environment: req.app.get('environment'),
+      model: model
+    };
     if (req.param('raw')) {
-      return new RawView({
-        requirePath: req.app.get('requirePath'),
-        assetPath: req.app.get('assetPath'),
-        environment: req.app.get('environment'),
-        model: model
-      });
+      return new RawView(viewOptions);
     } else {
-      return new GovUkView({
-        requirePath: req.app.get('requirePath'),
-        assetPath: req.app.get('assetPath'),
-        environment: req.app.get('environment'),
-        model: model
-      });
+      return new GovUkView(viewOptions);
     }
   };
 
   var renderContent = function (req, res, model) {
-    var content = setUpView(req, model); 
+    var content = setUpView(req, model);
 
     content.once('postrender', function () {
       res.send(content.html);
@@ -60,7 +56,7 @@ function (StagecraftApiClient, GovUkView, RawView) {
   };
 
   setup.getStagecraftApiClient = function () {
-    return new StagecraftApiClient(); 
+    return new StagecraftApiClient();
   };
   setup.renderContent = renderContent;
 
