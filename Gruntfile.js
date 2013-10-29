@@ -119,6 +119,19 @@ module.exports = function(grunt) {
             dest: 'public/'
           }
         ]
+      },
+      backbone_development: {
+        src: 'node_modules/backbone/backbone.js',
+        dest: 'app/vendor/',
+        expand: true,
+        flatten: true
+      },
+      backbone_production: {
+        src: 'node_modules/backbone/backbone-min.js',
+        dest: 'app/vendor/',
+        expand: true,
+        flatten: true,
+        rename: function (dest, src) { return dest + 'backbone.js' }
       }
     },
     watch: {
@@ -171,10 +184,10 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('build:development', [
-    'copy:govuk_template', 'jshint', 'clean', 'copy:govuk_assets', 'sass:development'
+    'copy:backbone_development', 'copy:govuk_template', 'jshint', 'clean', 'copy:govuk_assets', 'sass:development'
   ]);
   grunt.registerTask('build:production', [
-    'copy:govuk_template', 'jshint', 'clean', 'copy:govuk_assets', 'sass:production', 'requirejs'
+    'copy:backbone_production', 'copy:govuk_template', 'jshint', 'clean', 'copy:govuk_assets', 'sass:production', 'requirejs'
   ]);
   grunt.registerTask('test:all', ['jasmine_node', 'jasmine', 'cucumber']);
   grunt.registerTask('default', ['build:development', 'jasmine:spotlight:build', 'concurrent']);
