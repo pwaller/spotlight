@@ -96,7 +96,7 @@ function (Backbone, Model, Query, SafeSync, DateRange, moment, $) {
       options = options || {};
 
       _.each(this.collectionInstances, function (collection) {
-        collection.query.set(this.query.attributes, {silent: true})
+        collection.query.set(this.query.attributes, {silent: true});
       }, this);
 
       var numRequests = this.collectionInstances.length;
@@ -124,7 +124,7 @@ function (Backbone, Model, Query, SafeSync, DateRange, moment, $) {
         collection.on('error', function () {
           // escalate error status
           if (options.error) {
-            options.error.apply(collection, arguments)
+            options.error.apply(collection, arguments);
           }
           var args = ['error'].concat(Array.prototype.slice.call(arguments));
           this.trigger.apply(this, args);
@@ -184,7 +184,7 @@ function (Backbone, Model, Query, SafeSync, DateRange, moment, $) {
         // use custom comparator
         this.comparator = comparators[attr].call(this, attr, descending);
       } else {
-        this.comparator = this.defaultComparator.call(this, attr, descending)
+        this.comparator = this.defaultComparator.call(this, attr, descending);
       }
       this.sortDescending = Boolean(descending);
       this.sortAttr = attr;

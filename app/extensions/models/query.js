@@ -25,7 +25,7 @@ function (timezones, Model) {
       options = options || {};
       var utc = getAndDelete(options, 'utc', true);
       var timezone = utc ? timezones.utc : timezones.gb;
-      var periodName = attrs['period'];
+      var periodName = attrs.period;
       var period = periodName ? this.periods[periodName] : null;
       if (period) {
         var endAt = period.boundary(this.moment().utc());
