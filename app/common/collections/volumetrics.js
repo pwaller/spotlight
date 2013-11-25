@@ -14,8 +14,14 @@ function (MatrixCollection, Collection, Group, dateFunctions) {
       this.endMatcher= options.endMatcher;
       this.matchingAttribute= options.matchingAttribute;
       MatrixCollection.prototype.initialize.apply(this, arguments);
-      this.query.set('period', 'week', {silent: true, utc: false});
-      delete this.query.attributes.period;
+    },
+
+    queryParams: function () {
+      return {
+        collect: 'uniqueEvents:sum',
+        period: 'week',
+        group_by: 'eventCategory'
+      }
     },
 
     uniqueEventsFor: function (data, matcher) {

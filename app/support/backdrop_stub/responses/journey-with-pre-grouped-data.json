@@ -1,0 +1,252 @@
+{
+  "data": [
+    {
+      "_count": 8.0, 
+      "_group_count": 8, 
+      "eventCategory": "deposit-foreign-marriage:confirm", 
+      "uniqueEvents:sum": 1568.0, 
+      "values": [
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-09-30T00:00:00+00:00", 
+          "_start_at": "2013-09-23T00:00:00+00:00", 
+          "uniqueEvents:sum": 234.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-07T00:00:00+00:00", 
+          "_start_at": "2013-09-30T00:00:00+00:00", 
+          "uniqueEvents:sum": 208.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-14T00:00:00+00:00", 
+          "_start_at": "2013-10-07T00:00:00+00:00", 
+          "uniqueEvents:sum": 202.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-21T00:00:00+00:00", 
+          "_start_at": "2013-10-14T00:00:00+00:00", 
+          "uniqueEvents:sum": 184.0
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-10-28T00:00:00+00:00", 
+          "_start_at": "2013-10-21T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-04T00:00:00+00:00", 
+          "_start_at": "2013-10-28T00:00:00+00:00", 
+          "uniqueEvents:sum": 178.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-11T00:00:00+00:00", 
+          "_start_at": "2013-11-04T00:00:00+00:00", 
+          "uniqueEvents:sum": 209.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-18T00:00:00+00:00", 
+          "_start_at": "2013-11-11T00:00:00+00:00", 
+          "uniqueEvents:sum": 198.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-25T00:00:00+00:00", 
+          "_start_at": "2013-11-18T00:00:00+00:00", 
+          "uniqueEvents:sum": 155.0
+        }
+      ]
+    }, 
+    {
+      "_count": 8.0, 
+      "_group_count": 8, 
+      "eventCategory": "deposit-foreign-marriage:done", 
+      "uniqueEvents:sum": 161.0, 
+      "values": [
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-09-30T00:00:00+00:00", 
+          "_start_at": "2013-09-23T00:00:00+00:00", 
+          "uniqueEvents:sum": 28.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-07T00:00:00+00:00", 
+          "_start_at": "2013-09-30T00:00:00+00:00", 
+          "uniqueEvents:sum": 31.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-14T00:00:00+00:00", 
+          "_start_at": "2013-10-07T00:00:00+00:00", 
+          "uniqueEvents:sum": 19.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-21T00:00:00+00:00", 
+          "_start_at": "2013-10-14T00:00:00+00:00", 
+          "uniqueEvents:sum": 13.0
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-10-28T00:00:00+00:00", 
+          "_start_at": "2013-10-21T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-04T00:00:00+00:00", 
+          "_start_at": "2013-10-28T00:00:00+00:00", 
+          "uniqueEvents:sum": 26.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-11T00:00:00+00:00", 
+          "_start_at": "2013-11-04T00:00:00+00:00", 
+          "uniqueEvents:sum": 22.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-18T00:00:00+00:00", 
+          "_start_at": "2013-11-11T00:00:00+00:00", 
+          "uniqueEvents:sum": 14.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-25T00:00:00+00:00", 
+          "_start_at": "2013-11-18T00:00:00+00:00", 
+          "uniqueEvents:sum": 8.0
+        }
+      ]
+    }, 
+    {
+      "_count": 2.0, 
+      "_group_count": 2, 
+      "eventCategory": "deposit-foreign-marriage:payment_error", 
+      "uniqueEvents:sum": 6.0, 
+      "values": [
+        {
+          "_count": 0, 
+          "_end_at": "2013-09-30T00:00:00+00:00", 
+          "_start_at": "2013-09-23T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-07T00:00:00+00:00", 
+          "_start_at": "2013-09-30T00:00:00+00:00", 
+          "uniqueEvents:sum": 3.0
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-10-14T00:00:00+00:00", 
+          "_start_at": "2013-10-07T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-10-21T00:00:00+00:00", 
+          "_start_at": "2013-10-14T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-10-28T00:00:00+00:00", 
+          "_start_at": "2013-10-21T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-11-04T00:00:00+00:00", 
+          "_start_at": "2013-10-28T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-11T00:00:00+00:00", 
+          "_start_at": "2013-11-04T00:00:00+00:00", 
+          "uniqueEvents:sum": 3.0
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-11-18T00:00:00+00:00", 
+          "_start_at": "2013-11-11T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-11-25T00:00:00+00:00", 
+          "_start_at": "2013-11-18T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }
+      ]
+    }, 
+    {
+      "_count": 8.0, 
+      "_group_count": 8, 
+      "eventCategory": "deposit-foreign-marriage:start", 
+      "uniqueEvents:sum": 2498.0, 
+      "values": [
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-09-30T00:00:00+00:00", 
+          "_start_at": "2013-09-23T00:00:00+00:00", 
+          "uniqueEvents:sum": 378.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-07T00:00:00+00:00", 
+          "_start_at": "2013-09-30T00:00:00+00:00", 
+          "uniqueEvents:sum": 337.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-14T00:00:00+00:00", 
+          "_start_at": "2013-10-07T00:00:00+00:00", 
+          "uniqueEvents:sum": 300.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-10-21T00:00:00+00:00", 
+          "_start_at": "2013-10-14T00:00:00+00:00", 
+          "uniqueEvents:sum": 321.0
+        }, 
+        {
+          "_count": 0, 
+          "_end_at": "2013-10-28T00:00:00+00:00", 
+          "_start_at": "2013-10-21T00:00:00+00:00", 
+          "uniqueEvents:sum": null
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-04T00:00:00+00:00", 
+          "_start_at": "2013-10-28T00:00:00+00:00", 
+          "uniqueEvents:sum": 283.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-11T00:00:00+00:00", 
+          "_start_at": "2013-11-04T00:00:00+00:00", 
+          "uniqueEvents:sum": 319.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-18T00:00:00+00:00", 
+          "_start_at": "2013-11-11T00:00:00+00:00", 
+          "uniqueEvents:sum": 307.0
+        }, 
+        {
+          "_count": 1.0, 
+          "_end_at": "2013-11-25T00:00:00+00:00", 
+          "_start_at": "2013-11-18T00:00:00+00:00", 
+          "uniqueEvents:sum": 253.0
+        }
+      ]
+    }
+  ]
+}
