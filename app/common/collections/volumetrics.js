@@ -16,14 +16,6 @@ function (MatrixCollection, Collection, Group, dateFunctions) {
       MatrixCollection.prototype.initialize.apply(this, arguments);
     },
 
-    queryParams: function () {
-      return {
-        collect: 'uniqueEvents:sum',
-        period: 'week',
-        group_by: 'eventCategory'
-      }
-    },
-
     uniqueEventsFor: function (data, matcher) {
       var events = _.filter(data, function (d) {
         return d[this.matchingAttribute].match(matcher) !== null;

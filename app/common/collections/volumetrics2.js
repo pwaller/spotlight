@@ -21,7 +21,7 @@ function (MatrixCollection, Collection, Group, dateFunctions) {
         collect: 'uniqueEvents:sum',
         period: 'week',
         group_by: 'eventCategory'
-      }
+      };
     },
 
     findItem: function (matcher) {
@@ -90,11 +90,11 @@ function (MatrixCollection, Collection, Group, dateFunctions) {
     },
 
     totalWeeksInPeriod: function () {
-      return this.data[0]["values"].length;
+      return this.data[0].values.length;
     },
 
     availableWeeksInPeriod: function () {
-      return this.data[0]["_group_count"];
+      return this.data[0]._group_count;
     },
 
     series: function (config) {
