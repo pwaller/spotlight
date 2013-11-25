@@ -282,23 +282,23 @@ function (VolumetricsCollection, moment) {
           expect(parse.id).toBe("done");
           expect(parse.weeks.total).toBe(3);
           expect(parse.weeks.available).toBe(3);
-          expect(parse.mean).toBeCloseTo(3.33, 0.01);
+          expect(parse.mean).toBeCloseTo(53.66, 1);
           expect(parse.values).not.toBeUndefined();
         });
 
         it("should map applications to application series", function () {
           var firstValue = volumetricsCollection.parse({data: context.data}).values[6];
-          expect(firstValue.get('_start_at')).toBeMoment(moment("2013-06-10T01:00:00+01:00"));
-          expect(firstValue.get('_end_at')).toBeMoment(moment("2013-06-17T01:00:00+01:00"));
-          expect(firstValue.get('uniqueEvents')).toBe(3);
+          expect(firstValue.get('_start_at')).toBeMoment(moment("2013-11-11T01:00:00+00:00"));
+          expect(firstValue.get('_end_at')).toBeMoment(moment("2013-11-18T01:00:00+00:00"));
+          expect(firstValue.get('uniqueEvents')).toBe(22);
           var secondValue = volumetricsCollection.parse({data: context.data}).values[7];
-          expect(secondValue.get('_start_at')).toBeMoment(moment("2013-06-17T01:00:00+01:00"));
-          expect(secondValue.get('_end_at')).toBeMoment(moment("2013-06-24T01:00:00+01:00"));
-          expect(secondValue.get('uniqueEvents')).toBe(3);
+          expect(secondValue.get('_start_at')).toBeMoment(moment("2013-11-18T01:00:00+00:00"));
+          expect(secondValue.get('_end_at')).toBeMoment(moment("2013-11-25T01:00:00+00:00"));
+          expect(secondValue.get('uniqueEvents')).toBe(14);
           var thirdValue = volumetricsCollection.parse({data: context.data}).values[8];
-          expect(thirdValue.get('_start_at')).toBeMoment(moment("2013-06-24T01:00:00+01:00"));
-          expect(thirdValue.get('_end_at')).toBeMoment(moment("2013-07-01T01:00:00+01:00"));
-          expect(thirdValue.get('uniqueEvents')).toBe(4);
+          expect(thirdValue.get('_start_at')).toBeMoment(moment("2013-11-25T01:00:00+00:00"));
+          expect(thirdValue.get('_end_at')).toBeMoment(moment("2013-12-02T01:00:00+00:00"));
+          expect(thirdValue.get('uniqueEvents')).toBe(8);
         });
 
         it("should query for 9 weeks of data for application series", function () {
@@ -343,7 +343,7 @@ function (VolumetricsCollection, moment) {
 
           expect(parse.weeks.total).toBe(3);
           expect(parse.weeks.available).toBe(2);
-          expect(parse.mean).toBeCloseTo(3.5, 0.01);
+          expect(parse.mean).toBeCloseTo(80.5, 1);
         });
         
       }

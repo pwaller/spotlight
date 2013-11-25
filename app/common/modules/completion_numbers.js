@@ -1,7 +1,7 @@
 define([
   'extensions/controllers/module',
   'common/views/visualisations/completion_numbers',
-  'common/collections/completion_numbers'
+  'common/collections/completion_numbers2'
 ],
 function (ModuleController, CompletionNumbersView, CompletionNumbersCollection) {
   var CompletionNumbersModule = ModuleController.extend({
