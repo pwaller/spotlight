@@ -3,7 +3,16 @@
   "title": "Housing",
   "strapline": "Policy performance",
   "tagline": "",
+  "copy": "The government is helping local councils and developers work with local communities to plan and build better places to live for everyone. This includes building affordable housing, improving the quality of rented housing, helping more people to buy a home and providing housing support for vulnerable people.",
   "modules": [
+    {
+      "page-type": "module",
+      "module-type": "explanatory",
+      "title": "Housing",
+      "strapline": "Policy performance",
+      "tagline": "",
+      "copy": "The government is helping local councils and developers work with local communities to plan and build better places to live for everyone. This includes building affordable housing, improving the quality of rented housing, helping more people to buy a home and providing housing support for vulnerable people."
+    },
     {
       "page-type": "module",
       "module-type": "grouped_timeseries",
