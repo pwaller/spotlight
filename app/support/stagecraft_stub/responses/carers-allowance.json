@@ -16,6 +16,22 @@
       "data-type": "realtime"
     },
     {
+      "module-type": "grouped_timeseries",
+      "title": "Digital take-up",
+      "description": "Users completing the transaction online, including assisted digital users",
+      "data-group": "carers-allowance",
+      "data-type": "weekly-claims",
+      "value-attr": "value:sum",
+      "cumulative": true,
+      "category": "key",
+      "period": "week",
+      "series": [
+         { "id": "ca_clerical_received", "title": "Clerical" },
+         { "id": "ca_e_claims_received", "title": "Electronic" }
+       ],
+      "show-line-labels": true
+    },
+    {
       "module-type": "completion_rate",
       "title": "Completion rate",
       "description": "",
