@@ -170,6 +170,12 @@ module.exports = function(grunt) {
             expand: true
           },
           {
+            src: 'node_modules/topojson/topojson.js',
+            dest: 'app/vendor/',
+            flatten: true,
+            expand: true
+          },
+          {
             src: 'node_modules/moment-timezone/moment-timezone.js',
             dest: 'app/vendor/',
             flatten: true,

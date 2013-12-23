@@ -1,0 +1,26 @@
+{
+  "page-type": "module",
+  "slug": "regional_data",
+  "module-type": "uk_regional",
+  "title": "Residential property transactions",
+  "description": "Volume of residential property transactions by nations and regions",
+  "dashboard-title": "No realistic dashboard",
+  "dashboard-strapline": "Policy performance",
+  "dashboard-slug": "no-realistic-dashboard",
+  "data-group": "housing-policy",
+  "data-type": "residential-transactions",
+  "value-attr": "value:mean",
+  "category": "geography",
+  "period": "quarter",
+  "filter-by": ["key:residential_property_transactions"],
+  "info": [
+    "Info text line 1",
+    "Info text line 2"
+  ],
+  "series": [
+     { "id": "England", "title": "England" },
+     { "id": "Scotland", "title": "Scotland" },
+     { "id": "Wales", "title": "Wales" },
+     { "id": "Northern_Ireland", "title": "Northern Ireland" }
+   ]
+}
