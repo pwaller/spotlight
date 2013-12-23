@@ -18,6 +18,7 @@ define(function (options) {
     config.paths.underscore = 'vendor/lodash';
     config.paths.backbone = 'vendor/backbone';
     config.paths.d3 = 'vendor/d3';
+    config.paths.topojson = 'vendor/topojson';
     config.paths.modernizr = 'vendor/modernizr';
     config.paths.moment = 'vendor/moment';
     config.paths['moment-timezone'] = 'vendor/moment-timezone';
@@ -33,6 +34,9 @@ define(function (options) {
       },
       d3: {
         exports: 'd3'
+      },
+      topojson: {
+        exports: 'topojson'
       },
       modernizr: {
         exports: 'Modernizr'

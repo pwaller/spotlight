@@ -113,6 +113,7 @@ function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Toolti
       if (this.showLineLabels()) {
         figure.addClass("graph-with-labels");
       }
+      console.log(this.$el);
       figure.appendTo(this.$el);
 
       var graphWrapper = this.graphWrapper = $('<div class="graph-wrapper"></div>');
@@ -121,7 +122,9 @@ function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Toolti
       this.innerEl = $('<div class="inner"></div>');
       this.innerEl.appendTo(graphWrapper);
       
+      console.log("the svg");
       var svg = this.svg = this.d3.select(graphWrapper[0]).append('svg');
+      console.log(this.svg);
       
       this.wrapper = svg.append('g')
         .classed('wrapper', true);

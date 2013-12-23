@@ -1,19 +1,23 @@
 define([
   'extensions/views/graph/graph',
   'extensions/views/view',
-  'vendor/topojson',
-  'uk'
+  'topojson',
+  'uk_countries'
 ],
-function (Graph, View, topojson, uk) {
+function (Graph, View, topojson, uk_countries) {
   var UkMap = Graph.extend({
 
-    topojson: topojson,
+    initialize: function (options) {
+      //create svg in here
+      this.prepareGraphArea();
+      //this should be taken care of elsewhere
+      this.$el.appendTo($('.uk-map'));
+    },
 
-    renderContent: function(uk) {
-      console.log(uk);
+    renderContent: function(map) {
 
       //data
-      var subunits = this.topojson.feature(uk, uk.objects.subunits);
+      var subunits = topojson.feature(map, map.objects.subunits);
 
       //projection
       var projection = d3.geo.albers()
@@ -21,7 +25,7 @@ function (Graph, View, topojson, uk) {
           .rotate([4.4, 0])
           .parallels([50, 60])
           .scale(6000)
-          .translate([width / 2, height / 2]);
+          .translate([this.width / 2, this.height / 2]);
 
       //path
       var path = d3.geo.path()
@@ -34,8 +38,8 @@ function (Graph, View, topojson, uk) {
 
       //render and
       //subunit classes for styling
-      svg.selectAll(".subunit")
-          .data(topojson.feature(uk, uk.objects.subunits).features)
+      this.svg.selectAll(".subunit")
+          .data(topojson.feature(map, map.objects.subunits).features)
         .enter().append("path")
           .attr("class", function(d) { 
             return "subunit " + d.id; 
@@ -43,28 +47,28 @@ function (Graph, View, topojson, uk) {
           .attr("d", path);
 
       //borders
-      svg.append("path")
-        .datum(topojson.mesh(uk, uk.objects.subunits, function(a, b) { return a !== b && a.id !== "IRL"; }))
+      this.svg.append("path")
+        .datum(topojson.mesh(map, map.objects.subunits, function(a, b) { return a !== b && a.id !== "IRL"; }))
         .attr("d", path)
         .attr("class", "subunit-boundary");
 
       //borders ireland
-      svg.append("path")
-        .datum(topojson.mesh(uk, uk.objects.subunits, function(a, b) { return a === b && a.id === "IRL"; }))
+      this.svg.append("path")
+        .datum(topojson.mesh(map, map.objects.subunits, function(a, b) { return a === b && a.id === "IRL"; }))
         .attr("d", path)
         .attr("class", "subunit-boundary IRL");
 
       //places
       //filtered when json created
-      svg.append("path")
-        .datum(topojson.feature(uk, uk.objects.places))
+      this.svg.append("path")
+        .datum(topojson.feature(map, map.objects.places))
         .attr("d", path)
         .attr("class", "place");
 
       //labels
       //transform gets position
-      svg.selectAll(".place-label")
-        .data(topojson.feature(uk, uk.objects.places).features)
+      this.svg.selectAll(".place-label")
+        .data(topojson.feature(map, map.objects.places).features)
       .enter().append("text")
         .attr("class", "place-label")
         .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
@@ -72,13 +76,13 @@ function (Graph, View, topojson, uk) {
         .text(function(d) { return d.properties.name; });
 
       //right-aligned labels on the left side of the map, and left-aligned labels on the right side of the map, here using 1°W as the threshold
-      svg.selectAll(".place-label")
+      this.svg.selectAll(".place-label")
           .attr("x", function(d) { return d.geometry.coordinates[0] > -1 ? 6 : -6; })
           .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; });
 
       //countries
-      svg.selectAll(".subunit-label")
-          .data(topojson.feature(uk, uk.objects.subunits).features)
+      this.svg.selectAll(".subunit-label")
+          .data(topojson.feature(map, map.objects.subunits).features)
         .enter().append("text")
           .attr("class", function(d) { return "subunit-label " + d.id; })
           .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
@@ -93,6 +97,17 @@ function (Graph, View, topojson, uk) {
       d3.select(".subunit.IRL").style('display', 'none');
     },
 
+    width: 960,
+
+    height: 1160,
+
+    //create svg
+    renderSvg: function () {
+      this.svg
+        .attr("width", this.width)
+        .attr("height", this.height);
+    },
+
     render: function () {
       if (isServer) {
         return;
@@ -104,15 +119,8 @@ function (Graph, View, topojson, uk) {
       /*d3.json("uk.json", function(error, uk) {*/
       /*});*/
 
-      var width = 960,
-          height = 1160;
-
-      //create svg
-      var svg = d3.select("body").append("svg")
-          .attr("width", width)
-          .attr("height", height);
-
-      this.renderContent(uk);
+      this.renderSvg();
+      this.renderContent(uk_countries);
     }
 
 
