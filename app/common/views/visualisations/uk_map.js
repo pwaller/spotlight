@@ -8,14 +8,14 @@ function (Graph, View, topojson, uk_countries) {
   var UkMap = Graph.extend({
 
     initialize: function (options) {
-      //create svg in here
-      this.prepareGraphArea();
+      Graph.prototype.initialize.apply(this, arguments);
       //this should be taken care of elsewhere
       this.$el.appendTo($('.uk-map'));
     },
 
     renderContent: function(map) {
 
+      this.resize();
       //data
       var subunits = topojson.feature(map, map.objects.subunits);
 
@@ -30,11 +30,6 @@ function (Graph, View, topojson, uk_countries) {
       //path
       var path = d3.geo.path()
         .projection(projection);
-
-      //render
-    /*svg.append("path")*/
-    /*.datum(subunits)*/
-      /*.attr("d", path);*/
 
       //render and
       //subunit classes for styling
@@ -95,17 +90,8 @@ function (Graph, View, topojson, uk_countries) {
       d3.select(".subunit.NIR").style('fill', '#cdc');
       d3.select(".subunit.ENG").style('fill', '#dcd');
       d3.select(".subunit.IRL").style('display', 'none');
-    },
-
-    width: 960,
-
-    height: 1160,
-
-    //create svg
-    renderSvg: function () {
-      this.svg
-        .attr("width", this.width)
-        .attr("height", this.height);
+//max height messing up
+//center and aspect ration smaller
     },
 
     render: function () {
@@ -116,10 +102,6 @@ function (Graph, View, topojson, uk_countries) {
       //do this later with graph parent class to get axis, labels etc if needed
       View.prototype.render.apply(this, arguments);
       
-      /*d3.json("uk.json", function(error, uk) {*/
-      /*});*/
-
-      this.renderSvg();
       this.renderContent(uk_countries);
     }
 

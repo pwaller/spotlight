@@ -168,8 +168,11 @@ function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Toolti
       // when both max-width and max-height are defined, scale graph according
       // to this aspect ratio
       var maxWidth = this.pxToValue($svg.css('max-width'));
+      console.log(maxWidth);
       var maxHeight = this.pxToValue($svg.css('max-height'));
+      console.log(maxHeight);
       var minHeight = this.pxToValue($svg.css('min-height'));
+      console.log(minHeight);
       if (maxWidth != null && maxHeight != null) {
         var aspectRatio = maxWidth / maxHeight;
         height = width / aspectRatio;
