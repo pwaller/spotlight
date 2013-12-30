@@ -13,6 +13,7 @@ function (Component) {
 
     render: function () {
       Component.prototype.render.apply(this, arguments);
+      $("#legend").remove();
       steps = _.reduce(this.scale.ticks(20), function (memo, step_value){
         return memo += "<td style=\"background-color:"+this.getHsl(step_value)+";\">"+step_value+"</td>";
       }, "", this);
@@ -22,7 +23,7 @@ function (Component) {
       console.log("the steps");
       console.log(steps);
       console.log("the steps");
-      $("<table><tr>"+ steps +"</tr></table>").appendTo(this.$el);
+      $("<table id=\"legend\"><tr>"+ steps +"</tr></table>").appendTo(this.$el);
     }
 
   });
