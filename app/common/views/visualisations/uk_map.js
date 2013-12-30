@@ -16,6 +16,7 @@ function (Graph, View, topojson, uk_countries) {
     renderContent: function(map) {
 
       this.resize();
+      this.svg.selectAll('*').remove();
       console.log("rerender");
       //data
       var subunits = topojson.feature(map, map.objects.subunits);
@@ -27,7 +28,7 @@ function (Graph, View, topojson, uk_countries) {
           .center([0, 55.4])
           .rotate([4.4, 0])
           .parallels([50, 60])
-          .scale(6000)
+          .scale(6000 * (this.width / 954))
           .translate([this.width / 2, this.height / 2]);
 
       //path
