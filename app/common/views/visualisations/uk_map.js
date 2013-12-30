@@ -1,10 +1,11 @@
 define([
   'extensions/views/graph/graph',
+  'extensions/views/graph/legend',
   'extensions/views/view',
   'topojson',
   'uk_countries'
 ],
-function (Graph, View, topojson, uk_countries) {
+function (Graph, Legend, View, topojson, uk_countries) {
   var UkMap = Graph.extend({
 
     initialize: function (options) {
@@ -88,30 +89,11 @@ function (Graph, View, topojson, uk_countries) {
           .attr("dy", ".35em")
           .text(function(d) { return d.properties.name; });
 
-      //colours
-      var collectionMax = this.collection.max(function(m){
-        return m.get('values').last().get('value:mean');
-      });
-      var collectionMin = this.collection.min(function(m){
-        return m.get('values').last().get('value:mean');
-      });
-      var scale = this.scale = d3.scale.linear()
-                          .domain([collectionMin.get('values').last().get('value:mean'), collectionMax.get('values').last().get('value:mean')])
-                          .range([80,50]);
-      this.getColourStringForRegion('England');
-
-
-      console.log(this.getColourStringForRegion('Scotland'));
       d3.select(".subunit.SCT").style('fill', this.getColourStringForRegion('Scotland'));
-      console.log(this.getColourStringForRegion('Wales'));
       d3.select(".subunit.WLS").style('fill', this.getColourStringForRegion('Wales'));
-      console.log(this.getColourStringForRegion('Northern_Ireland'));
       d3.select(".subunit.NIR").style('fill', this.getColourStringForRegion('Northern_Ireland'));
-      console.log(this.getColourStringForRegion('England'));
       d3.select(".subunit.ENG").style('fill', this.getColourStringForRegion('England'));
       d3.select(".subunit.IRL").style('display', 'none');
-//max height messing up
-//center and aspect ration smaller
     },
 
     getColourStringForRegion: function (region){
@@ -119,7 +101,32 @@ function (Graph, View, topojson, uk_countries) {
         return m.get('id') == region;
       });
 
-      return d3.hsl("hsl(0,100%," + this.scale(model.get('values').last().get('value:mean'))+"%)").toString();
+      return this.getHsl(model.get('values').last().get('value:mean'));
+    },
+
+    getHsl: function (value){
+      return d3.hsl("hsl(0,100%," + this.scale(value) + "%)").toString();
+    },
+
+    //this is just here to make graph parent class be nice
+    //we do need to scale defined on init though
+    //should we pass the value of scale to the legend or just how to work it out?
+    //probably how to work it out so collection changes fall through without reinit
+    calcXScale: function () {
+      //colours
+      var collectionMax = this.collection.max(function(m){
+        return m.get('values').last().get('value:mean');
+      });
+      var collectionMin = this.collection.min(function(m){
+        return m.get('values').last().get('value:mean');
+      });
+
+      this.collectionMax = collectionMax.get('values').last().get('value:mean');
+      this.collectionMin = collectionMin.get('values').last().get('value:mean');
+      this.scale = d3.scale.linear()
+        .domain([this.collectionMin, this.collectionMax])
+        .range([80,50]);
+      return this.scale;
     },
 
     render: function () {
@@ -127,62 +134,23 @@ function (Graph, View, topojson, uk_countries) {
         return;
       }
 
-      //do this later with graph parent class to get axis, labels etc if needed
-      View.prototype.render.apply(this, arguments);
-      
+      Graph.prototype.render.apply(this, arguments);
       this.renderContent(uk_countries);
+    },
+
+    components: function () {
+      return [
+        { 
+          view: Legend,
+          options: {
+            calcXScale: this.calcXScale,
+            getHsl: this.getHsl
+          }
+        }
+      ];
     }
 
 
-//    initialize: function (options) {
-//      Graph.prototype.initialize.apply(this, arguments);
-//      if (this.model && this.model.get('value-attr')) {
-//        this.valueAttr = this.model.get('value-attr');
-//      }
-//    },
-//
-//    interactiveFunction: function (e) {
-//      if (this.graph.lineLabelOnTop()) {
-//        return e.slice >= 3;
-//      } else {
-//        return e.slice % 3 !== 2;
-//      }
-//    },
-//    
-//    components: function () {
-//      var labelComponent, labelOptions, stackOptions;
-//
-//      if (this.showLineLabels()) {
-//        labelComponent = this.sharedComponents.linelabel;
-//        labelOptions = {
-//          showValues: true,
-//          showValuesPercentage: true,
-//          showSummary: true,
-//          showTimePeriod: true,
-//          attachLinks: this.model.get('line-label-links')
-//        };
-//        stackOptions = {
-//          selectGroup: false,
-//          allowMissingData: true,
-//          drawCursorLine: true,
-//          interactive: this.interactiveFunction
-//        };
-//      } else {
-//        labelComponent = this.sharedComponents.callout;
-//      }
-//
-//      return [
-//        { view: this.sharedComponents.xaxis },
-//        { view: this.sharedComponents.yaxis },
-//        { view: this.sharedComponents.stack, options: stackOptions },
-//        { view: labelComponent, options: labelOptions },
-//        { view: this.sharedComponents.hover }
-//      ];
-//    },
-//
-//    getConfigNames: function () {
-//      return ['stack', this.collection.query.get('period') || 'week'];
-//    }
   });
   
   return UkMap;
