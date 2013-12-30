@@ -16,10 +16,13 @@ function (Graph, View, topojson, uk_countries) {
     renderContent: function(map) {
 
       this.resize();
+      console.log("rerender");
       //data
       var subunits = topojson.feature(map, map.objects.subunits);
 
       //projection
+      console.log(this.width);
+      console.log(this.height);
       var projection = d3.geo.albers()
           .center([0, 55.4])
           .rotate([4.4, 0])
@@ -85,13 +88,37 @@ function (Graph, View, topojson, uk_countries) {
           .text(function(d) { return d.properties.name; });
 
       //colours
-      d3.select(".subunit.SCT").style('fill', '#ddc');
-      d3.select(".subunit.WLS").style('fill', '#cdd');
-      d3.select(".subunit.NIR").style('fill', '#cdc');
-      d3.select(".subunit.ENG").style('fill', '#dcd');
+      var collectionMax = this.collection.max(function(m){
+        return m.get('values').last().get('value:mean');
+      });
+      var collectionMin = this.collection.min(function(m){
+        return m.get('values').last().get('value:mean');
+      });
+      var scale = this.scale = d3.scale.linear()
+                          .domain([collectionMin.get('values').last().get('value:mean'), collectionMax.get('values').last().get('value:mean')])
+                          .range([80,50]);
+      this.getColourStringForRegion('England');
+
+
+      console.log(this.getColourStringForRegion('Scotland'));
+      d3.select(".subunit.SCT").style('fill', this.getColourStringForRegion('Scotland'));
+      console.log(this.getColourStringForRegion('Wales'));
+      d3.select(".subunit.WLS").style('fill', this.getColourStringForRegion('Wales'));
+      console.log(this.getColourStringForRegion('Northern_Ireland'));
+      d3.select(".subunit.NIR").style('fill', this.getColourStringForRegion('Northern_Ireland'));
+      console.log(this.getColourStringForRegion('England'));
+      d3.select(".subunit.ENG").style('fill', this.getColourStringForRegion('England'));
       d3.select(".subunit.IRL").style('display', 'none');
 //max height messing up
 //center and aspect ration smaller
+    },
+
+    getColourStringForRegion: function (region){
+      var model = this.collection.find(function(m){
+        return m.get('id') == region;
+      });
+
+      return d3.hsl("hsl(0,100%," + this.scale(model.get('values').last().get('value:mean'))+"%)").toString();
     },
 
     render: function () {
