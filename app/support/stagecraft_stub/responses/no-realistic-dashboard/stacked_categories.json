@@ -20,5 +20,11 @@
      { "id": "Wales", "title": "Wales" },
      { "id": "Northern_Ireland", "title": "Northern Ireland" }
    ],
+  "column_meta": [
+     { "title": "England", "valueAttr": "value:sum" },
+     { "title": "Scotland", "valueAttr": "value:sum"  },
+     { "title": "Wales", "valueAttr": "value:sum"  },
+     { "title": "Northern Ireland", "valueAttr": "value:sum"  }
+  ],
   "show-line-labels": true
 }

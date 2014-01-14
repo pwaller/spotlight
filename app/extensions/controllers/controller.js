@@ -1,6 +1,8 @@
 define([
-  'backbone'
-], function (Backbone) {
+  'backbone',
+  'common/collections/table',
+  'common/views/visualisations/table'
+], function (Backbone, TableCollection, TableView) {
 
   var Controller = function(options) {
     options = options || {};
@@ -19,13 +21,17 @@ define([
       options = _.extend({}, this.viewOptions(), options);
       
       if (!this.view) {
+        this.table = new TableView(options);
         this.view = new this.viewClass(options);
       }
 
       var view = this.view;
+      var table = this.table;
       view.render();
+      table.render();
       
       this.html = view.html || view.$el[0].outerHTML;
+      this.html += table.html || table.$el[0].outerHTML;
       this.trigger('ready');
     },
 
