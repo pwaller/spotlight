@@ -11,6 +11,13 @@ function (View, template) {
       View.prototype.initialize.apply(this, arguments);
     },
 
+    trimEnd: function (array, condition) {
+      while(condition(_.last(array))){
+        array.pop();
+      }
+      return array;
+    },
+
     templateContext: function () {
       var columns = [];
 
@@ -24,23 +31,37 @@ function (View, template) {
 //        };
 //        columns.push(column);
 //      }, this);
+      var numValues = 0;
       _.each(this.model.get('column_meta'), function (columnMeta) {
         var column_data = _.find(this.collection.models, function (model) {
           return model.get('title') == columnMeta.title;
         });
+        var data = column_data.get('values').reduce(function (values, model) {
+          values.push({
+            value: model.get(columnMeta.valueAttr),
+            period: this.formatPeriod(model, 'month')
+          });
+          return values;
+        }, [], this);
+        data = this.trimEnd(data, function(item){
+          return item.value == null;
+        });
+        if(data.length > numValues){
+          numValues = data.length; 
+        }
         var column = {
           title: columnMeta.title,
-          data: column_data.get('values').map(function (model) {
-            return model.get(columnMeta.valueAttr);
-          })
+          data: data
         };
+        console.log(numValues);
         columns.push(column);
       }, this);
 
+      console.log(columns);
       return _.extend(
         View.prototype.templateContext.apply(this, arguments),
         {
-          numValues: 12,
+          numValues: numValues,
           columns: columns
         }
       );
