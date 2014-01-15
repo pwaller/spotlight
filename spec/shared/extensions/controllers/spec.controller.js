@@ -1,10 +1,11 @@
 define([
   'extensions/controllers/controller',
+  'common/views/visualisations/table',
   'extensions/views/view',
   'extensions/models/model',
   'extensions/collections/collection'
 ],
-function (Controller, View, Model, Collection) {
+function (Controller, TableView, View, Model, Collection) {
   describe("Controller", function () {
     describe("render", function () {
 
@@ -122,43 +123,83 @@ function (Controller, View, Model, Collection) {
     
     describe("renderView", function () {
 
-      var controller, model;
+      var controller, model, TestView;
       beforeEach(function() {
-        spyOn(View.prototype, "render");
-        model = new Model({
-          'data-type': 'foo-type',
-          'data-group': 'bar-group'
-        });
-        var TestView = View.extend({
+        TableView.prototype.render = function () {
+          this.$el.html('hello I am a table');
+        };
+
+        TestView = View.extend({
           render: function () {
             this.$el.html('content');
           }
         });
 
-        controller = new Controller({
-          model: model,
-          viewClass: TestView,
-          viewOptions: function () {
-            return {
-              foo: 'bar'
-            };
-          }
+      });
+
+      describe("if the model has column_meta configuration", function () {
+        beforeEach(function (){
+          model = new Model({
+            'column_meta': [],
+            'data-type': 'foo-type',
+            'data-group': 'bar-group'
+          });
+          controller = new Controller({
+            model: model,
+            viewClass: TestView,
+            viewOptions: function () {
+              return {
+                foo: 'bar'
+              };
+            }
+          });
+        });
+        it("instantiates the view class and renders the content plus a table", function () {
+          controller.renderView();
+          expect(controller.html).toEqual('<div>content</div><div>hello I am a table</div>');
+          expect(controller.view.foo).toEqual('bar');
+        });
+
+        it("triggers a 'ready' event", function () {
+          var triggered = false;
+          controller.once('ready', function () {
+            triggered = true;
+          });
+          controller.renderView();
+          expect(triggered).toBe(true);
         });
       });
 
-      it("instantiates the view class and renders the content", function () {
-        controller.renderView();
-        expect(controller.html).toEqual('<div>content</div>');
-        expect(controller.view.foo).toEqual('bar');
-      });
-
-      it("triggers a 'ready' event", function () {
-        var triggered = false;
-        controller.once('ready', function () {
-          triggered = true;
+      describe("if the model has no column_meta configuration", function () {
+        beforeEach(function (){
+          model = new Model({
+            'data-type': 'foo-type',
+            'data-group': 'bar-group'
+          });
+          controller = new Controller({
+            model: model,
+            viewClass: TestView,
+            viewOptions: function () {
+              return {
+                foo: 'bar'
+              };
+            }
+          });
         });
-        controller.renderView();
-        expect(triggered).toBe(true);
+        it("instantiates the view class and renders the content without a table", function () {
+          controller.renderView();
+          expect(controller.html).toEqual('<div>content</div>');
+          expect(controller.view.foo).toEqual('bar');
+        });
+
+        it("triggers a 'ready' event", function () {
+          var triggered = false;
+          controller.once('ready', function () {
+            triggered = true;
+          });
+          controller.renderView();
+          expect(triggered).toBe(true);
+        });
       });
     });
   });

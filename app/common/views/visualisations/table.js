@@ -12,8 +12,6 @@ function (View, template) {
     },
 
     templateContext: function () {
-      console.log("templateContext");
-      console.log(this.collection);
       var columns = [];
 
       //for matrix collection
@@ -27,19 +25,15 @@ function (View, template) {
 //        columns.push(column);
 //      }, this);
       _.each(this.model.get('column_meta'), function (columnMeta) {
-        console.log("collect within");
-        console.log(this.collection);
         var column_data = _.find(this.collection.models, function (model) {
-          console.log(this.collection);
-          console.log(model);
           return model.get('title') == columnMeta.title;
-        })
+        });
         var column = {
           title: columnMeta.title,
           data: column_data.get('values').map(function (model) {
             return model.get(columnMeta.valueAttr);
           })
-        }
+        };
         columns.push(column);
       }, this);
 

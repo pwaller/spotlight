@@ -46,7 +46,13 @@ def values
       'no-realistic-dashboard' => {
         title: 'Categories in a stack',
         description: '',
-        raw: "//*[name()='svg']"
+        raw: "//*[name()='svg']",
+        table_headers: [
+          'England',
+          'Scotland',
+          'Wales',
+          "Northern Ireland"
+        ] 
       }
     },
     'starts_completions' => {
@@ -94,4 +100,11 @@ Then(/^I should see other information for the "(.*?)" "(.*?)" module$/) do |serv
   if v[:info]
     find_section_for(display_module).should have_content('more info')
   end
+end
+
+Then(/^I should see the table for the "(.*?)" "(.*?)" module$/) do |service, display_module|
+  v = values[display_module][service]
+  v[:table_headers].each do |header|
+    find_section_for(display_module).should have_xpath("//thead/tr/th[text()='#{header}']")
+  end 
 end
