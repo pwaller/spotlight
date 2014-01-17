@@ -39,7 +39,7 @@ function (View, template) {
         var data = column_data.get('values').reduce(function (values, model) {
           values.push({
             value: model.get(columnMeta.valueAttr),
-            period: this.formatPeriod(model, 'month')
+            period: this.formatPeriod(model, (this.model.get('period') ? this.model.get('period') : columnMeta.period))
           });
           return values;
         }, [], this);
@@ -53,11 +53,9 @@ function (View, template) {
           title: columnMeta.title,
           data: data
         };
-        console.log(numValues);
         columns.push(column);
       }, this);
 
-      console.log(columns);
       return _.extend(
         View.prototype.templateContext.apply(this, arguments),
         {
