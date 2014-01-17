@@ -77,6 +77,9 @@
         "Info text line 1",
         "Info text line 2"
       ],
+      "column_meta": [
+        { "title": "Done", "valueAttr": "uniqueEvents", "period": "week" }
+      ],
       "start-matcher": "start$",
       "end-matcher": "done$"
     },

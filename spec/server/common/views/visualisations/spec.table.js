@@ -3,11 +3,12 @@ define([
   'extensions/collections/collection',
   'common/collections/grouped_timeseries',
   'common/collections/completion_rate',
+  'common/collections/completion_numbers',
   'extensions/models/model',
   'path',
   'fs'
 ],
-function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateCollection, Model, path, fs) {
+function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateCollection, CompletionNumbersCollection, Model, path, fs) {
 
   var collectionWithStubbedFetchResponse = function (collectionClass, options, json_response) {
     collection = new collectionClass([], options);
@@ -123,6 +124,54 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             var html = table_view.$el[0].outerHTML;
             expect(table_view.$("th[scope='col']:contains('Date Period')").length).toEqual(1);
             expect(table_view.$("th[scope='col']:contains('Completion rate')").length).toEqual(1);
+            expect(table_view.$("tr").length).toEqual(10);
+            expect(table_view.$("td[scope='row']").length).toEqual(9);
+            expect(table_view.$("td[scope='row']:eq(0)").text()).toEqual("15 to 21 July 2013");
+            expect(table_view.$("td[scope='row']:eq(8)").text()).toEqual("9 to 15 Sep 2013");
+            expect(table_view.$("td").length).toEqual(2 * 9);
+          }, this);
+          collection.fetch();
+        });
+      });
+      describe("CompletionNumbersCollection", function() {
+        var model, collection;
+        beforeEach(function () {
+          var collection_config_options = {
+            "module-type": "completion_numbers",
+            "title": "Completed applications",
+            "description": "",
+            "data-group": "deposit-foreign-marriage",
+            "data-type": "journey",
+            "info": [
+              "Info text line 1",
+              "Info text line 2"
+            ],
+            "start-matcher": "start$",
+            "end-matcher": "done$"
+          };
+          var table_options = {
+            "column_meta": [
+              { "title": "Done", "valueAttr": "uniqueEvents", "period": "week" }
+            ]
+          };
+          var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/journey-with-missing-data.json'));
+          var json_response = JSON.parse(response);
+          collection = collectionWithStubbedFetchResponse(CompletionNumbersCollection, collection_config_options, json_response);
+          collection.options = _.extend(collection.options, collection_config_options);
+
+          model = new Model(table_options);
+        });
+
+        it("should render the table correctly", function () {
+          collection.once('sync reset error', function() {
+            var table_view = new TableView({
+              model: model,
+              collection: collection
+            });
+            table_view.render();
+            var html = table_view.$el[0].outerHTML;
+            expect(table_view.$("th[scope='col']:contains('Date Period')").length).toEqual(1);
+            expect(table_view.$("th[scope='col']:contains('Done')").length).toEqual(1);
             expect(table_view.$("tr").length).toEqual(10);
             expect(table_view.$("td[scope='row']").length).toEqual(9);
             expect(table_view.$("td[scope='row']:eq(0)").text()).toEqual("15 to 21 July 2013");
