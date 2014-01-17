@@ -126,12 +126,12 @@ function (Controller, TableView, View, Model, Collection) {
       var controller, model, TestView;
       beforeEach(function() {
         TableView.prototype.render = function () {
-          this.$el.html('hello I am a table');
+          this.$el.html('<p>hello I am a table</p>');
         };
 
         TestView = View.extend({
           render: function () {
-            this.$el.html('content');
+            this.$el.html('<div class="visualisation"><p>content</p></div>');
           }
         });
 
@@ -156,7 +156,47 @@ function (Controller, TableView, View, Model, Collection) {
         });
         it("instantiates the view class and renders the content plus a table", function () {
           controller.renderView();
-          expect(controller.html).toEqual('<div>content</div><div>hello I am a table</div>');
+          expect(controller.html).toEqual('<div><div class="visualisation"><p>content</p><p>hello I am a table</p></div></div>');
+          expect(controller.view.foo).toEqual('bar');
+        });
+
+        it("triggers a 'ready' event", function () {
+          var triggered = false;
+          controller.once('ready', function () {
+            triggered = true;
+          });
+          controller.renderView();
+          expect(triggered).toBe(true);
+        });
+      });
+
+      describe("if the model has column_meta configuration but there is no visualisation", function () {
+
+        beforeEach(function (){
+          TestView = View.extend({
+            render: function () {
+              this.$el.html('<div><p>content</p></div>');
+            }
+          });
+
+          model = new Model({
+            'column_meta': [],
+            'data-type': 'foo-type',
+            'data-group': 'bar-group'
+          });
+          controller = new Controller({
+            model: model,
+            viewClass: TestView,
+            viewOptions: function () {
+              return {
+                foo: 'bar'
+              };
+            }
+          });
+        });
+        it("instantiates the view class and renders the content plus a table", function () {
+          controller.renderView();
+          expect(controller.html).toEqual('<div><div><p>content</p></div></div>');
           expect(controller.view.foo).toEqual('bar');
         });
 
@@ -188,7 +228,7 @@ function (Controller, TableView, View, Model, Collection) {
         });
         it("instantiates the view class and renders the content without a table", function () {
           controller.renderView();
-          expect(controller.html).toEqual('<div>content</div>');
+          expect(controller.html).toEqual('<div><div class="visualisation"><p>content</p></div></div>');
           expect(controller.view.foo).toEqual('bar');
         });
 

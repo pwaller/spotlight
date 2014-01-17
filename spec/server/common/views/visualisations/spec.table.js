@@ -4,11 +4,12 @@ define([
   'common/collections/grouped_timeseries',
   'common/collections/completion_rate',
   'common/collections/completion_numbers',
+  'common/collections/multi_stats',
   'extensions/models/model',
   'path',
   'fs'
 ],
-function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateCollection, CompletionNumbersCollection, Model, path, fs) {
+function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateCollection, CompletionNumbersCollection, MultiStatsCollection, Model, path, fs) {
 
   var collectionWithStubbedFetchResponse = function (collectionClass, options, json_response) {
     collection = new collectionClass([], options);
@@ -177,6 +178,63 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             expect(table_view.$("td[scope='row']:eq(0)").text()).toEqual("15 to 21 July 2013");
             expect(table_view.$("td[scope='row']:eq(8)").text()).toEqual("9 to 15 Sep 2013");
             expect(table_view.$("td").length).toEqual(2 * 9);
+          }, this);
+          collection.fetch();
+        });
+      });
+      describe("MultiStatsCollection", function() {
+        var model, collection;
+        beforeEach(function () {
+          var collection_config_options = {
+            "module-type": "multi_stats",
+            "title": "Average first mortgage",
+            "description": "A range of factors indicative of the state of the housing market for first-time buyers",
+            "data-group": "housing-policy",
+            "data-type": "first-time-buyer",
+            "period": "month",
+            "stats": [
+              {
+                "title": "Median size of mortgage",
+                "attr": "median_advance_sterling",
+                "format": "£{{ value }}"
+              },
+              {
+                "title": "Median advance",
+                "attr": "median_percentage_advance",
+                "format": "{{ value }}%"
+              }
+            ]
+          };
+          var table_options = {
+            "period": "month",
+            "column_meta": [
+              { "title": "MultiStats", "column_header": "Median advance", "valueAttr": "median_advance_sterling" },
+              { "title": "MultiStats", "column_header": "Median size of mortgage", "valueAttr": "median_percentage_advance" }
+            ]
+          };
+          var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/housing-first-time-buyer.json'));
+          var json_response = JSON.parse(response);
+          collection = collectionWithStubbedFetchResponse(MultiStatsCollection, collection_config_options, json_response);
+          collection.options = _.extend(collection.options, collection_config_options);
+
+          model = new Model(table_options);
+        });
+
+        it("should render the table correctly", function () {
+          collection.once('sync reset error', function() {
+            var table_view = new TableView({
+              model: model,
+              collection: collection
+            });
+            table_view.render();
+            var html = table_view.$el[0].outerHTML;
+            expect(table_view.$("th[scope='col']:contains('Median advance')").length).toEqual(1);
+            expect(table_view.$("th[scope='col']:contains('Median size of mortgage')").length).toEqual(1);
+            expect(table_view.$("tr").length).toEqual(26);
+            expect(table_view.$("td[scope='row']").length).toEqual(25);
+            expect(table_view.$("td[scope='row']:eq(0)").text()).toEqual("July to Sep 2007");
+            expect(table_view.$("td[scope='row']:eq(24)").text()).toEqual("July to Sep 2013");
+            expect(table_view.$("td").length).toEqual(3 * 25);
           }, this);
           collection.fetch();
         });

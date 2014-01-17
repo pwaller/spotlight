@@ -118,6 +118,10 @@
           "attr": "median_percentage_advance",
           "format": "{{ value }}%"
         }
+      ],
+      "column_meta": [
+         { "title": "MultiStats", "column_header": "Median advance", "valueAttr": "median_advance_sterling" },
+         { "title": "MultiStats", "column_header": "Median size of mortgage", "valueAttr": "median_percentage_advance" }
       ]
     },
     {

@@ -20,5 +20,9 @@
       "attr": "median_percentage_advance",
       "format": "{{ value }}%"
     }
+  ],
+  "column_meta": [
+    { "title": "MultiStats", "valueAttr": "median_advance_sterling" },
+    { "title": "MultiStats", "valueAttr": "median_percentage_advance" }
   ]
 }

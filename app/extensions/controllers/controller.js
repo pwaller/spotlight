@@ -22,25 +22,29 @@ define([
       if (!this.view) {
         this.view = new this.viewClass(options);
       }
-      this.renderTableIfConfigured(options);
+      var table_html = this.renderTableIfConfigured(options);
 
       var view = this.view;
       view.render();
       
-      this.html = view.html || view.$el[0].outerHTML;
-      if(this.table){
-        this.html += this.table.html || this.table.$el[0].outerHTML;
+      if(table_html){
+        $(table_html).appendTo(view.$('div.visualisation'));
       }
+
+      this.html = view.html || view.$el[0].outerHTML;
       this.trigger('ready');
     },
 
     renderTableIfConfigured: function (options){
+      var table_html;
       if (!this.table) {
         if(this.model.get('column_meta')){
           this.table = new TableView(options);
           this.table.render();
+          table_html = this.table.$el[0].innerHTML;
         }
       }
+      return table_html;
     },
 
     render: function (options) {

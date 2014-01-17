@@ -50,7 +50,7 @@ function (View, template) {
           numValues = data.length; 
         }
         var column = {
-          title: columnMeta.title,
+          title: columnMeta.column_header ? columnMeta.column_header : columnMeta.title,
           data: data
         };
         columns.push(column);
