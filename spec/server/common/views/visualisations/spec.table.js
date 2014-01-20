@@ -5,11 +5,12 @@ define([
   'common/collections/completion_rate',
   'common/collections/completion_numbers',
   'common/collections/multi_stats',
+  'common/collections/availability',
   'extensions/models/model',
   'path',
   'fs'
 ],
-function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateCollection, CompletionNumbersCollection, MultiStatsCollection, Model, path, fs) {
+function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateCollection, CompletionNumbersCollection, MultiStatsCollection, AvailabilityCollection, Model, path, fs) {
 
   var collectionWithStubbedFetchResponse = function (collectionClass, options, json_response) {
     collection = new collectionClass([], options);
@@ -228,6 +229,7 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             });
             table_view.render();
             var html = table_view.$el[0].outerHTML;
+            expect(table_view.$("th[scope='col']:contains('Date Period')").length).toEqual(1);
             expect(table_view.$("th[scope='col']:contains('Median advance')").length).toEqual(1);
             expect(table_view.$("th[scope='col']:contains('Median size of mortgage')").length).toEqual(1);
             expect(table_view.$("tr").length).toEqual(26);
@@ -235,6 +237,53 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             expect(table_view.$("td[scope='row']:eq(0)").text()).toEqual("July to Sep 2007");
             expect(table_view.$("td[scope='row']:eq(24)").text()).toEqual("July to Sep 2013");
             expect(table_view.$("td").length).toEqual(3 * 25);
+          }, this);
+          collection.fetch();
+        });
+      });
+      describe("AvailabilityCollection", function() {
+        var model, collection;
+        beforeEach(function () {
+          var collection_config_options = {
+            "module-type": "availability",
+            "title": "Service availability",
+            "description": "",
+            "data-group": "deposit-foreign-marriage",
+            "data-type": "monitoring",
+            "info": [
+              "Info text line 1",
+              "Info text line 2"
+            ],
+            "tabs": [
+              {"id": "day", "name": "30 days"},
+              {"id": "hour", "name": "24 hours"}
+            ],
+            "tabbed_attr": "period"
+          };
+          var table_options = {
+            "period": "month",
+            "column_meta": [
+              { "title": "MultiStats", "column_header": "Median advance", "valueAttr": "median_advance_sterling" },
+              { "title": "MultiStats", "column_header": "Median size of mortgage", "valueAttr": "median_percentage_advance" }
+            ]
+          };
+          var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/deposit_foreign_marriage_monitoring_day.json'));
+          var json_response = JSON.parse(response);
+          collection = collectionWithStubbedFetchResponse(AvailabilityCollection, collection_config_options, json_response);
+          collection.options = _.extend(collection.options, collection_config_options);
+
+          model = new Model(table_options);
+        });
+
+        it("should render the table correctly", function () {
+          collection.once('sync reset error', function() {
+            var table_view = new TableView({
+              model: model,
+              collection: collection
+            });
+            table_view.render();
+            var html = table_view.$el[0].outerHTML;
+            expect(table_view.$("th[scope='col']:contains('Date period')").length).toEqual(1);
           }, this);
           collection.fetch();
         });
