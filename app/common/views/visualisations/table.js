@@ -21,17 +21,8 @@ function (View, template) {
     templateContext: function () {
       var columns = [];
 
-      //for matrix collection
-//      _.each(this.model.get('column_meta'), function (columnMeta) {
-//        var column = {
-//          title: columnMeta.title,
-//          data: this.collection.map(function (model) {
-//            return model.get(columnMeta.valueAttr);
-//          })
-//        };
-//        columns.push(column);
-//      }, this);
       var numValues = 0;
+      var period = this.collection.query.get('period');
       _.each(this.model.get('column_meta'), function (columnMeta) {
         var column_data = _.find(this.collection.models, function (model) {
           return model.get('title') == columnMeta.title;
@@ -39,7 +30,8 @@ function (View, template) {
         var data = column_data.get('values').reduce(function (values, model) {
           values.push({
             value: model.get(columnMeta.valueAttr),
-            period: this.formatPeriod(model, (this.model.get('period') ? this.model.get('period') : columnMeta.period))
+            //necessary until we refactor completion number and rate
+            period: this.formatPeriod(model, (period ? period : columnMeta.period))
           });
           return values;
         }, [], this);

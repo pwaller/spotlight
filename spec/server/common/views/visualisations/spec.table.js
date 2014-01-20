@@ -37,6 +37,7 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
         beforeEach(function () {
           var collection_config_options = {
             "category": "geography",
+            "period": "month",
             "seriesList": [
                { "id": "England", "title": "England" },
                { "id": "Scotland", "title": "Scotland" },
@@ -45,7 +46,6 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             ]
           };
           var table_options = {
-            "period": "month",
             "column_meta": [
                { "title": "England", "valueAttr": "value:sum" },
                { "title": "Scotland", "valueAttr": "value:sum"  },
@@ -261,10 +261,10 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             "tabbed_attr": "period"
           };
           var table_options = {
-            "period": "month",
+            "period": "day",
             "column_meta": [
-              { "title": "MultiStats", "column_header": "Median advance", "valueAttr": "median_advance_sterling" },
-              { "title": "MultiStats", "column_header": "Median size of mortgage", "valueAttr": "median_percentage_advance" }
+              { "title": "Availability", "column_header": "Page load time", "valueAttr": "avgresponse" },
+              { "title": "Availability", "column_header": "Uptime", "valueAttr": "uptimeFraction" }
             ]
           };
           var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/deposit_foreign_marriage_monitoring_day.json'));
@@ -283,7 +283,7 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             });
             table_view.render();
             var html = table_view.$el[0].outerHTML;
-            expect(table_view.$("th[scope='col']:contains('Date period')").length).toEqual(1);
+            expect(table_view.$("th[scope='col']:contains('Date Period')").length).toEqual(1);
           }, this);
           collection.fetch();
         });
