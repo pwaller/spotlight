@@ -283,6 +283,13 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             table_view.render();
             var html = table_view.$el[0].outerHTML;
             expect(table_view.$("th[scope='col']:contains('Date Period')").length).toEqual(1);
+            expect(table_view.$("th[scope='col']:contains('Page load time')").length).toEqual(1);
+            expect(table_view.$("th[scope='col']:contains('Uptime')").length).toEqual(1);
+            expect(table_view.$("tr").length).toEqual(31);
+            expect(table_view.$("td[scope='row']").length).toEqual(30);
+            expect(table_view.$("td[scope='row']:eq(0)").text()).toEqual("15 Oct 2013");
+            expect(table_view.$("td[scope='row']:eq(29)").text()).toEqual("13 Nov 2013");
+            expect(table_view.$("td").length).toEqual(3 * 30);
           }, this);
           collection.fetch();
         });

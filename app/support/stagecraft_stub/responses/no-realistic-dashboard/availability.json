@@ -16,5 +16,9 @@
     {"id": "day", "name": "30 days"},
     {"id": "hour", "name": "24 hours"}
   ],
+  "column_meta": [
+    { "title": "Availability", "column_header": "Page load time", "valueAttr": "avgresponse" },
+    { "title": "Availability", "column_header": "Uptime", "valueAttr": "uptimeFraction" }
+  ],
   "tabbed_attr": "period"
 }
