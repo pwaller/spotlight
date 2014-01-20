@@ -261,7 +261,6 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
             "tabbed_attr": "period"
           };
           var table_options = {
-            "period": "day",
             "column_meta": [
               { "title": "Availability", "column_header": "Page load time", "valueAttr": "avgresponse" },
               { "title": "Availability", "column_header": "Uptime", "valueAttr": "uptimeFraction" }
