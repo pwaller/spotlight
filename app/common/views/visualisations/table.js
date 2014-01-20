@@ -7,10 +7,6 @@ function (View, template) {
 
     template: template,
 
-    initialize: function (options) {
-      View.prototype.initialize.apply(this, arguments);
-    },
-
     trimEnd: function (array, condition) {
       while(condition(_.last(array))){
         array.pop();
@@ -18,40 +14,59 @@ function (View, template) {
       return array;
     },
 
-    templateContext: function () {
-      var columns = [];
+    getColumnData: function (title) {
+      return _.find(this.collection.models, function (model) {
+        return model.get('title') == title;
+      });
+    },
 
-      var numValues = 0;
-      var period = this.collection.query.get('period');
-      _.each(this.model.get('column_meta'), function (columnMeta) {
-        var column_data = _.find(this.collection.models, function (model) {
-          return model.get('title') == columnMeta.title;
-        });
-        var data = column_data.get('values').reduce(function (values, model) {
-          values.push({
-            value: model.get(columnMeta.valueAttr),
-            //necessary until we refactor completion number and rate
-            period: this.formatPeriod(model, (period ? period : columnMeta.period))
-          });
-          return values;
-        }, [], this);
-        data = this.trimEnd(data, function(item){
-          return item.value == null;
-        });
-        if(data.length > numValues){
-          numValues = data.length; 
-        }
-        var column = {
-          title: columnMeta.column_header ? columnMeta.column_header : columnMeta.title,
-          data: data
+    getColumnValues: function (column, columnMeta) {
+      data = column.get('values').map(function (model) {
+        return {
+          value: model.get(columnMeta.valueAttr),
+          period: this.formatPeriod(model, this.getPeriodType(columnMeta))
         };
-        columns.push(column);
+      }, this);
+      return this.trimEnd(data, function(item){
+        return item.value == null;
+      });
+    },
+
+    //necessary until we refactor completion number and rate
+    getPeriodType: function (columnMeta) {
+      var period = this.collection.query.get('period');
+      return period ? period : columnMeta.period;
+    },
+
+    numberOfValues: 0,
+
+    updateNumberOfValuesIfRequired: function (new_number){
+      if(new_number > this.numberOfValues){
+        this.numberOfValues = new_number; 
+      }
+    },
+
+    buildColumn: function (columnMeta, column_values) {
+      return {
+        title: columnMeta.column_header ? columnMeta.column_header : columnMeta.title,
+        data: column_values 
+      };
+    },
+
+    templateContext: function () {
+      var columns = this.model.get('column_meta').map(function (columnMeta) {
+        var column_data = this.getColumnData(columnMeta.title);
+        var column_values = this.getColumnValues(column_data, columnMeta);
+
+        this.updateNumberOfValuesIfRequired(column_values.length);
+
+        return this.buildColumn(columnMeta, column_values);
       }, this);
 
       return _.extend(
         View.prototype.templateContext.apply(this, arguments),
         {
-          numValues: numValues,
+          numValues: this.numberOfValues,
           columns: columns
         }
       );

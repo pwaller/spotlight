@@ -12,5 +12,10 @@
     {"id": "deposit-foreign-marriage:start", "title": "Start"},
     {"id": "deposit-foreign-marriage:confirm", "title": "Confirm"},
     {"id": "deposit-foreign-marriage:done", "title": "Done"}
+  ],
+  "column_meta": [
+    { "title": "Journey", "column_header": "Start", "valueAttr": "uniqueEvents" },
+    { "title": "Journey", "column_header": "Confirm", "valueAttr": "uniqueEvents" },
+    { "title": "Journey", "column_header": "Done", "valueAttr": "uniqueEvents" }
   ]
 }

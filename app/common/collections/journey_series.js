@@ -3,6 +3,8 @@ define([
 ], function(Collection) {
   var JourneySeriesCollection = Collection.extend({
 
+    title: "Journey",
+
     initialize: function (models, options) {
       options = options || {};
       if (options.getStep) {

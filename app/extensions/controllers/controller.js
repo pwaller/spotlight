@@ -13,6 +13,8 @@ define([
 
     initialize: function (options) {},
 
+    tableClass: TableView,
+
     viewOptions: function () {},
     collectionOptions: function () {},
 
@@ -39,7 +41,7 @@ define([
       var table_html;
       if (!this.table) {
         if(this.model.get('column_meta')){
-          this.table = new TableView(options);
+          this.table = new this.tableClass(options);
           this.table.render();
           table_html = this.table.$el[0].innerHTML;
         }

@@ -1,6 +1,7 @@
 define([
   'common/views/visualisations/table',
   'extensions/collections/collection',
+  'extensions/collections/matrix',
   'common/collections/grouped_timeseries',
   'common/collections/completion_rate',
   'common/collections/completion_numbers',
@@ -10,12 +11,22 @@ define([
   'path',
   'fs'
 ],
-function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateCollection, CompletionNumbersCollection, MultiStatsCollection, AvailabilityCollection, Model, path, fs) {
+function (
+  TableView, 
+  Collection, 
+  MatrixCollection, 
+  GroupedTimeseriesCollection, 
+  CompletionRateCollection, 
+  CompletionNumbersCollection, 
+  MultiStatsCollection, 
+  AvailabilityCollection, 
+  Model, 
+  path, 
+  fs
+) {
 
-  var collectionWithStubbedFetchResponse = function (collectionClass, options, json_response) {
-    collection = new collectionClass([], options);
-
-    var fetch_method_returning_response = function(options) {
+  var fetch_method_returning_response = function (json_response) {  
+    return function(options) {
       options = options ? _.clone(options) : {};
       if (options.parse === void 0) options.parse = true;
       var success = options.success;
@@ -25,7 +36,12 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
       if (success) success(collection, json_response, options);
       collection.trigger('sync', collection, json_response, options);
     };
-    collection.fetch = fetch_method_returning_response;
+  };
+
+  var collectionWithStubbedFetchResponse = function (collectionClass, options, json_response) {
+    collection = new collectionClass([], options);
+
+    collection.fetch = fetch_method_returning_response(json_response);
 
     return collection
   };
@@ -111,7 +127,6 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
           var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/journey-with-missing-data.json'));
           var json_response = JSON.parse(response);
           collection = collectionWithStubbedFetchResponse(CompletionRateCollection, collection_config_options, json_response);
-          collection.options = _.extend(collection.options, collection_config_options);
 
           model = new Model(table_options);
         });
@@ -159,7 +174,6 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
           var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/journey-with-missing-data.json'));
           var json_response = JSON.parse(response);
           collection = collectionWithStubbedFetchResponse(CompletionNumbersCollection, collection_config_options, json_response);
-          collection.options = _.extend(collection.options, collection_config_options);
 
           model = new Model(table_options);
         });
@@ -216,7 +230,6 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
           var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/housing-first-time-buyer.json'));
           var json_response = JSON.parse(response);
           collection = collectionWithStubbedFetchResponse(MultiStatsCollection, collection_config_options, json_response);
-          collection.options = _.extend(collection.options, collection_config_options);
 
           model = new Model(table_options);
         });
@@ -269,7 +282,6 @@ function (TableView, Collection, GroupedTimeseriesCollection, CompletionRateColl
           var response = fs.readFileSync(path.join('app/support/backdrop_stub/responses/deposit_foreign_marriage_monitoring_day.json'));
           var json_response = JSON.parse(response);
           collection = collectionWithStubbedFetchResponse(AvailabilityCollection, collection_config_options, json_response);
-          collection.options = _.extend(collection.options, collection_config_options);
 
           model = new Model(table_options);
         });
