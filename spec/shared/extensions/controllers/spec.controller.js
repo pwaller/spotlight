@@ -123,8 +123,12 @@ function (Controller, TableView, View, Model, Collection) {
     
     describe("renderView", function () {
 
-      var controller, model, TestView;
+      var collection, controller, model, TestView;
       beforeEach(function() {
+        collection = {
+          on: function () {
+          } 
+        };
         TableView.prototype.render = function () {
           this.$el.html('<p>hello I am a table</p>');
         };
@@ -155,7 +159,7 @@ function (Controller, TableView, View, Model, Collection) {
           });
         });
         it("instantiates the view class and renders the content plus a table", function () {
-          controller.renderView();
+          controller.renderView({collection: collection});
           expect(controller.html).toEqual('<div><div class="visualisation"><p>content</p><p>hello I am a table</p></div></div>');
           expect(controller.view.foo).toEqual('bar');
         });
@@ -165,7 +169,7 @@ function (Controller, TableView, View, Model, Collection) {
           controller.once('ready', function () {
             triggered = true;
           });
-          controller.renderView();
+          controller.renderView({collection: collection});
           expect(triggered).toBe(true);
         });
       });
@@ -195,7 +199,7 @@ function (Controller, TableView, View, Model, Collection) {
           });
         });
         it("instantiates the view class and renders the content plus a table", function () {
-          controller.renderView();
+          controller.renderView({collection: collection});
           expect(controller.html).toEqual('<div><div><p>content</p></div></div>');
           expect(controller.view.foo).toEqual('bar');
         });
@@ -205,7 +209,7 @@ function (Controller, TableView, View, Model, Collection) {
           controller.once('ready', function () {
             triggered = true;
           });
-          controller.renderView();
+          controller.renderView({collection: collection});
           expect(triggered).toBe(true);
         });
       });

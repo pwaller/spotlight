@@ -7,6 +7,16 @@ function (View, template) {
 
     template: template,
 
+    initialize: function () {
+      View.prototype.initialize.apply(this, arguments);
+
+      var events = 'reset sync error';
+      if (this.changeOnSelected) {
+        events += ' change:selected';
+      }
+      this.collection.on(events, this.render, this);
+    },
+
     trimEnd: function (array, condition) {
       while(condition(_.last(array))){
         array.pop();
@@ -22,6 +32,8 @@ function (View, template) {
 
     getColumnValues: function (column, columnMeta) {
       data = column.get('values').map(function (model) {
+       console.log(this.getPeriodType(columnMeta));
+       console.log(this.formatPeriod(model, this.getPeriodType(columnMeta)));
         return {
           value: model.get(columnMeta.valueAttr),
           period: this.formatPeriod(model, this.getPeriodType(columnMeta))

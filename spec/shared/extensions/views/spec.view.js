@@ -499,6 +499,14 @@ function (View, Model, Backbone, _) {
       var view = new View();
       var moment = Model.prototype.moment;
 
+      it("formats single hours", function () {
+        var model = new Model({
+          _start_at: View.prototype.getMoment('2013-08-19T09:00:00+00:00'),
+          _end_at: View.prototype.getMoment('2013-08-19T10:00:00+00:00')
+        });
+        expect(view.formatPeriod(model, 'hour')).toEqual('9am to 10am, 19 August 2013');
+      });
+
       it("formats single days", function () {
         var model = new Model({
           _start_at: View.prototype.getMoment('2013-08-19T00:00:00+00:00'),

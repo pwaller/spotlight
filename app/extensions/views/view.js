@@ -331,6 +331,14 @@ function (Backbone, DateFunctions, Modernizr, $, _) {
       var end = model.get('_end_at') || model.get('end_at');
 
       switch (period) {
+        case 'hour':
+          return [
+            start.format('ha'),
+            ' to ',
+            end.format('ha'),
+            ', ',
+            start.format('D MMMM YYYY')
+          ].join('');
         case 'week': // fall through; we're formatting weeks same as days
         case 'day':
           if (end) {

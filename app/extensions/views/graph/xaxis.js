@@ -62,6 +62,7 @@ function (Axis) {
       }
     },
 
+    //this determines format, not formatPeriod - why did I think that?
     configs: {
       hour: {
         getTick: function (model) {
