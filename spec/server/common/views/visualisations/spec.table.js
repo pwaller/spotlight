@@ -305,6 +305,25 @@ function (
           }, this);
           collection.fetch();
         });
+        it("should render the table correctly", function () {
+          collection.once('sync reset error', function() {
+            var table_view = new TableView({
+              model: model,
+              collection: collection
+            });
+            table_view.render();
+            var html = table_view.$el[0].outerHTML;
+            expect(table_view.$("th[scope='col']:contains('Date Period')").length).toEqual(1);
+            expect(table_view.$("th[scope='col']:contains('Page load time')").length).toEqual(1);
+            expect(table_view.$("th[scope='col']:contains('Uptime')").length).toEqual(1);
+            expect(table_view.$("tr").length).toEqual(31);
+            expect(table_view.$("td[scope='row']").length).toEqual(30);
+            expect(table_view.$("td[scope='row']:eq(0)").text()).toEqual("12am to 12am, 15 October 2013");
+            expect(table_view.$("td[scope='row']:eq(29)").text()).toEqual("12am to 12am, 13 November 2013");
+            expect(table_view.$("td").length).toEqual(3 * 30);
+          }, this);
+          collection.query.set('period', 'hour')
+        });
       });
     });
     describe("when the collection is a flat (normal) collection", function() {
