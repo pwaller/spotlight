@@ -7,6 +7,10 @@ function (View, template) {
 
     template: template,
 
+    //el: function(){
+      //return 'div.' + this.className + '_table';
+    //},
+
     initialize: function () {
       View.prototype.initialize.apply(this, arguments);
 
@@ -16,6 +20,23 @@ function (View, template) {
       }
       this.collection.on(events, this.render, this);
     },
+
+//    render: function (options) {
+//      options = options || {};
+//      this.removeSubviews(options);
+//      if (this.template) {
+//        var context = _.extend(
+//          this.templateContext(), options.context
+//        );
+//        if(this.$el.html().length > 0){
+//          console.log(123);
+//          /*$(this.template(context)).appendTo(view.$('div.visualisation'));*/
+//        }else{
+//          this.$el.html(this.template(context));
+//        }
+//      }
+//      this.renderSubviews(options);
+//    },
 
     trimEnd: function (array, condition) {
       while(condition(_.last(array))){
