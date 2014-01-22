@@ -12,7 +12,6 @@ function (View) {
         
         onTabClick: function (event) {
             var tabId = $(event.currentTarget).data('tab-id');
-            console.log(this.attr, tabId);
             this.model.set(this.attr, tabId);
             this.collection.options.valueAttr = tabId;
             this.collection.options.valueAttribute = tabId;

@@ -8,7 +8,6 @@ function (SingleStatView) {
 
     labelPrefix: 'mean ',
 
-  //DIS HERE
     config: {
       hour: {
         label: '24 hours',

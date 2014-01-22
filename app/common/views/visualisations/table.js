@@ -32,8 +32,6 @@ function (View, template) {
 
     getColumnValues: function (column, columnMeta) {
       data = column.get('values').map(function (model) {
-       console.log(this.getPeriodType(columnMeta));
-       console.log(this.formatPeriod(model, this.getPeriodType(columnMeta)));
         return {
           value: model.get(columnMeta.valueAttr),
           period: this.formatPeriod(model, this.getPeriodType(columnMeta))
@@ -50,8 +48,6 @@ function (View, template) {
       return period ? period : columnMeta.period;
     },
 
-    numberOfValues: 0,
-
     updateNumberOfValuesIfRequired: function (new_number){
       if(new_number > this.numberOfValues){
         this.numberOfValues = new_number; 
@@ -66,6 +62,7 @@ function (View, template) {
     },
 
     templateContext: function () {
+      this.numberOfValues = 0;
       var columns = this.model.get('column_meta').map(function (columnMeta) {
         var column_data = this.getColumnData(columnMeta.title);
         var column_values = this.getColumnValues(column_data, columnMeta);
