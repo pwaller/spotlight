@@ -1,5 +1,6 @@
 define([
   'extensions/views/view',
+  'common/views/visualisations/table',
   'd3loader!',
   './xaxis',
   './yaxis',
@@ -10,7 +11,7 @@ define([
   './callout',
   './tooltip'
 ],
-function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Tooltip) {
+function (View, TableView, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Tooltip) {
 
 
   var scaleFromStartAndEndDates = {
@@ -56,6 +57,17 @@ function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Toolti
   var Graph = View.extend({
 
     d3: d3,
+
+    tableClass: function(){
+      var type = this.model.get("slug") || this.model.get("module-type");
+      return type + "_table";
+    },
+
+    views: function (){
+      var views = {};
+      views["." + this.tableClass()] = {view: TableView};
+      return views;
+    },
 
     valueAttr: '_count',
 
@@ -127,6 +139,7 @@ function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Toolti
       if (this.showLineLabels()) {
         figure.addClass("graph-with-labels");
       }
+
       figure.appendTo(this.$el);
 
       var graphWrapper = this.graphWrapper = $('<div class="graph-wrapper"></div>');
@@ -277,8 +290,6 @@ function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Toolti
         return;
       }
 
-      View.prototype.render.apply(this, arguments);
-      
       if (this.collection.options) {
         this.currency = this.collection.options.currency;
       }
@@ -303,6 +314,12 @@ function (View, d3, XAxis, YAxis, Line, Stack, LineLabel, Hover, Callout, Toolti
         });
         component.render();
       }, this);
+
+      var table = this.table = $('<div/>').addClass(this.tableClass());
+      table.appendTo(this.figure);
+
+      View.prototype.render.apply(this, arguments);
+      
     },
 
     configs: {

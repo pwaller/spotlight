@@ -17,34 +17,16 @@ define([
 
     renderView: function (options) {
       options = _.extend({}, this.viewOptions(), options);
-      table_options = _.extend({}, options, this.tableViewOptions());
       
       if (!this.view) {
         this.view = new this.viewClass(options);
       }
-      var table_html = this.renderTableIfConfigured(table_options);
 
       var view = this.view;
       view.render();
       
-      if(table_html){
-        $(table_html).appendTo(view.$('div.visualisation'));
-      }
-
       this.html = view.html || view.$el[0].outerHTML;
       this.trigger('ready');
-    },
-
-    renderTableIfConfigured: function (options){
-      var table_html;
-      if (!this.table) {
-        if(this.model.get('column_meta')){
-          this.table = new this.tableClass(options);
-          this.table.render();
-          table_html = this.table.$el.html() || this.table.$el[0].outerHTML;
-        }
-      }
-      return table_html;
     },
 
     render: function (options) {
