@@ -6,6 +6,7 @@ define([
 function (ModuleController, AvailabilityView, AvailabilityCollection) {
   var AvailabilityModule = ModuleController.extend({
     className: 'availability',
+    tableClassName: 'availability_table',
     visualisationClass: AvailabilityView,
     collectionClass: AvailabilityCollection,
     clientRenderOnInit: true,

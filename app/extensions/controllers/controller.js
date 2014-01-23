@@ -1,7 +1,6 @@
 define([
-  'backbone',
-  'common/views/visualisations/table'
-], function (Backbone, TableView) {
+  'backbone'
+], function (Backbone) {
 
   var Controller = function(options) {
     options = options || {};
@@ -13,18 +12,17 @@ define([
 
     initialize: function (options) {},
 
-    tableClass: TableView,
-
     viewOptions: function () {},
     collectionOptions: function () {},
 
     renderView: function (options) {
       options = _.extend({}, this.viewOptions(), options);
+      table_options = _.extend({}, options, this.tableViewOptions());
       
       if (!this.view) {
         this.view = new this.viewClass(options);
       }
-      var table_html = this.renderTableIfConfigured(options);
+      var table_html = this.renderTableIfConfigured(table_options);
 
       var view = this.view;
       view.render();
@@ -43,7 +41,7 @@ define([
         if(this.model.get('column_meta')){
           this.table = new this.tableClass(options);
           this.table.render();
-          table_html = this.table.$el[0].innerHTML;
+          table_html = this.table.$el.html() || this.table.$el[0].outerHTML;
         }
       }
       return table_html;

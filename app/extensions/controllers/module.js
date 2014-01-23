@@ -3,17 +3,25 @@ define([
   'modernizr',
   'common/views/module',
   'common/views/module_raw',
+  'common/views/visualisations/table',
   'common/views/module_standalone'
-], function (Controller, Modernizr, ModuleView, RawView, StandaloneView) {
+], function (Controller, Modernizr, ModuleView, RawView, TableView, StandaloneView) {
 
   var ModuleController = Controller.extend({
     Modernizr: Modernizr,
+
+    tableClass: TableView,
 
     visualisationClass: null,
     requiresSvg: false,
 
     id: function () {
       return this.model.get("slug") || this.model.get("module-type");
+    },
+
+    table_id: function () {
+      var id = this.model.get("slug") || this.model.get("module-type");
+      return id + "_table";
     },
         
     initialize: function(options) {
@@ -36,6 +44,26 @@ define([
         return;
       }
       Controller.prototype.render.apply(this, arguments);
+    },
+
+    tableViewOptions: function () {
+      var options = {
+        visualisationClass: this.visualisationClass,
+        className: this.tableClassName,
+        id: this.table_id,
+        requiresSvg: this.requiresSvg,
+        url: this.url
+      };
+
+      if (isClient) {
+        // reuse existing module slot
+        var el = $('#' + this.table_id());
+        if (el.length) {
+          options.el = el;
+        }
+      }
+
+      return options;
     },
 
     viewOptions: function () {
