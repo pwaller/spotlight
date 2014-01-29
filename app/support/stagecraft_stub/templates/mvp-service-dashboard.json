@@ -1,6 +1,6 @@
 {
   "page-type": "dashboard",
-  "title": "Deposit foreign marriage or civil partnership certificates",
+  "title": {{title}},
   "strapline": "Service performance",
   "tagline": "Figures for applications processed on GOV.UK in the UK for the service to pay the Foreign & Commonwealth Office (FCO) to deposit a foreign marriage or civil partnership certificate at the General Registry Office.",
   "modules": [
@@ -13,15 +13,15 @@
         "Data source: Google Analytics",
         "Shows the estimated number of users currently accessing the service on GOV.UK."
       ],
-      "data-group": "deposit-foreign-marriage",
-      "data-type": "realtime"
+      "data-group": {{modules[0]['data-group']}},
+      "data-type": {{modules[0]['data-type']}}
     },
     {
       "module-type": "completion_numbers",
       "title": "Completed applications",
       "description": "",
-      "data-group": "deposit-foreign-marriage",
-      "data-type": "journey",
+      "data-group": {{modules[1]['data-group']}},
+      "data-type": {{modules[1]['data-type']}},
       "info": [
         "Data source: Google Analytics",
         "Completed applications count based on unique visitors to the final page of the service."
@@ -34,8 +34,8 @@
       "module-type": "completion_rate",
       "title": "Completion rate",
       "description": "",
-      "data-group": "deposit-foreign-marriage",
-      "data-type": "journey",
+      "data-group": {{modules[2]['data-group']}},
+      "data-type": {{modules[2]['data-type']}},
       "info": [
         "Data source: Google Analytics",
         "<a href='/service-manual/measurement/completion-rate' rel='external'>Completion rate</a> measures the proportion of people who started an application and were able to complete it.",
@@ -53,8 +53,8 @@
         "The total number of users who arrived at each stage.",
         "Number of users is measured using the count of unique events from each stage."
       ],
-      "data-group": "deposit-foreign-marriage",
-      "data-type": "journey",
+      "data-group": {{modules[3]['data-group']}},
+      "data-type": {{modules[3]['data-type']}},
       "steps": [
         {"id": "deposit-foreign-marriage:start", "title": "Start"},
         {"id": "deposit-foreign-marriage:confirm", "title": "Confirm"},
@@ -66,8 +66,8 @@
       "module-type": "availability",
       "title": "Service availability",
       "description": "",
-      "data-group": "deposit-foreign-marriage",
-      "data-type": "monitoring",
+      "data-group": {{modules[4]['data-group']}},
+      "data-type": {{modules[4]['data-type']}},
       "info": [
         "Data source: Pingdom",
         "Page load time measures the time taken for a sample page within the service to load.",

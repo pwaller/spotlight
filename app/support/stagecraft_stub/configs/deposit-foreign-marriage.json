@@ -1,0 +1,25 @@
+{
+  "title": "Deposit foreign marriage or civil partnership certificates",
+  "modules": [
+    {
+      "data-group": "deposit-foreign-marriage",
+      "data-type": "realtime"
+    },
+    {
+      "data-group": "deposit-foreign-marriage",
+      "data-type": "journey"
+    },
+    {
+      "data-group": "deposit-foreign-marriage",
+      "data-type": "journey"
+    },
+    {
+      "data-group": "deposit-foreign-marriage",
+      "data-type": "journey"
+    },
+    {
+      "data-group": "deposit-foreign-marriage",
+      "data-type": "monitoring"
+    }
+  ]
+}
