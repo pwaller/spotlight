@@ -14,7 +14,8 @@
     "$",
     "d3",
     "waitsFor",
-    "runs"
+    "runs",
+    "window"
   ],
 
   "node"          : true,
