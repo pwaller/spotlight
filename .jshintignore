@@ -13,6 +13,7 @@ vendor/*
 public/*
 config/*
 support/*
+spec/helpers/*
 app/vendor/*
 app/support/*
 tools/*
