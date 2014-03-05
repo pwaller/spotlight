@@ -12,7 +12,9 @@
     "xit",
     "xdescribe",
     "$",
-    "d3"
+    "d3",
+    "waitsFor",
+    "runs"
   ],
 
   "node"          : true,
