@@ -3,7 +3,7 @@ define([
   'extensions/collections/collection'
 ],
 function (InterleavedBar, Collection) {
-  describe("InterleavedBarComponent", function () {
+  describe('InterleavedBarComponent', function () {
     
     var d3 = InterleavedBar.prototype.d3;
 
@@ -13,29 +13,29 @@ function (InterleavedBar, Collection) {
       wrapper = d3.select(el[0]).append('svg').append('g');
       collection = new Collection([
         {
-          testAttr:'b',
+          testAttr: 'b',
           values: new Collection([
-            { b:2, name: "one"},
-            { b:5, name: "two"},
-            { b:8, name: "three"}
+            { b: 2, name: 'one'},
+            { b: 5, name: 'two'},
+            { b: 8, name: 'three'}
           ])
         },
         {
-          testAttr:'c',
+          testAttr: 'c',
           values: new Collection([
-            { b:12, name: "four"},
-            { b:15, name: "five"},
-            { b:18, name: "six"}
+            { b: 12, name: 'four'},
+            { b: 15, name: 'five'},
+            { b: 18, name: 'six'}
           ])
         }
       ]);
       view = new InterleavedBar({
-        wrapper:wrapper,
-        collection:collection,
-        yStack: function (model, i) {
+        wrapper: wrapper,
+        collection: collection,
+        yStack: function (model) {
           return model.get('b');
         },
-        blockWidth: function (model, index) {
+        blockWidth: function () {
           return this.scales.x(1) - this.scales.x(0);
         },
         graph: {
@@ -44,7 +44,7 @@ function (InterleavedBar, Collection) {
             return model.get('b');
           }
         },
-        scales:{
+        scales: {
           x: function (v) {
             return v * 20;
           },
@@ -59,7 +59,7 @@ function (InterleavedBar, Collection) {
       el.remove();
     });
 
-    describe("render", function () {
+    describe('render', function () {
 
       var assertSegment = function (s, v) {
         var rectX = v.x;
@@ -89,7 +89,7 @@ function (InterleavedBar, Collection) {
         }
       };
 
-      it("renders for each model in each series", function () {
+      it('renders for each model in each series', function () {
         view.blockMarginFraction = 0;
         view.barMarginFraction = 0;
         view.render();
@@ -114,11 +114,11 @@ function (InterleavedBar, Collection) {
         assertSegment(group2.select('g.segment:nth-child(3)'), { x: 50, y: -36, width: 10, height: 36 });
       });
 
-      it("renders segments with text labels for each model in each series", function () {
+      it('renders segments with text labels for each model in each series', function () {
         view.blockMarginFraction = 0;
         view.barMarginFraction = 0;
-        view.text = function(model, i) {
-          return 'foo ' + model.get('name')
+        view.text = function (model) {
+          return 'foo ' + model.get('name');
         };
         view.offsetText = -20;
         view.render();
@@ -134,20 +134,38 @@ function (InterleavedBar, Collection) {
 
         var group1 = d3.select('g.group:nth-child(1)');
         assertSegment(group1.select('g.segment:nth-child(1)'), {
-          x:  0, y:  -4, width: 10, height:  4, textX:  5, textY: -24, text: 'foo one'
+          x:  0,
+          y:  -4,
+          width: 10,
+          height:  4,
+          textX:  5,
+          textY: -24,
+          text: 'foo one'
         });
         assertSegment(group1.select('g.segment:nth-child(2)'), {
-          x: 20, y: -10, width: 10, height: 10, textX: 25, textY: -30, text: 'foo two'
+          x: 20,
+          y: -10,
+          width: 10,
+          height: 10,
+          textX: 25,
+          textY: -30,
+          text: 'foo two'
         });
         assertSegment(group1.select('g.segment:nth-child(3)'), {
-          x: 40, y: -16, width: 10, height: 16, textX: 45, textY: -36, text: 'foo three'
+          x: 40,
+          y: -16,
+          width: 10,
+          height: 16,
+          textX: 45,
+          textY: -36,
+          text: 'foo three'
         });
       });
 
-      it("renders with a simulated inner stroke for each model in each series", function () {
+      it('renders with a simulated inner stroke for each model in each series', function () {
 
         view.strokeAlign = 'inner';
-        spyOn(view, "getStrokeWidth").andReturn(2);
+        spyOn(view, 'getStrokeWidth').andReturn(2);
         view.blockMarginFraction = 0;
         view.barMarginFraction = 0;
         view.render();
@@ -172,7 +190,7 @@ function (InterleavedBar, Collection) {
         assertSegment(group2.select('g.segment:nth-child(3)'), { strokeWidth: 2, x: 50, y: -36, width: 10, height: 36 });
       });
 
-      it("renders centre-aligned segments by default for each model in each series with gaps between series", function () {
+      it('renders centre-aligned segments by default for each model in each series with gaps between series', function () {
         view.blockMarginFraction = 0.2; // 4 pixels for a block width of 20 - 2 pixels each side
         view.barMarginFraction = 0;
         view.render();
@@ -197,7 +215,7 @@ function (InterleavedBar, Collection) {
         assertSegment(group2.select('g.segment:nth-child(3)'), { x: 50, y: -36, width: 8, height: 36 });
       });
 
-      it("renders centre-aligned segments by default for each model in each series with gaps between bars", function () {
+      it('renders centre-aligned segments by default for each model in each series with gaps between bars', function () {
         view.blockMarginFraction = 0;
         view.barMarginFraction = 0.2; // 4 pixels for a block width of 20
         view.render();
@@ -222,11 +240,11 @@ function (InterleavedBar, Collection) {
         assertSegment(group2.select('g.segment:nth-child(3)'), { x: 52, y: -36, width: 8, height: 36 });
       });
 
-      it("renders centre-aligned segments and text for each model in each series with gaps between bars and series", function () {
+      it('renders centre-aligned segments and text for each model in each series with gaps between bars and series', function () {
         view.blockMarginFraction = 0.2; // 4 pixels for a block width of 20 - 2 pixels on each side
         view.barMarginFraction = 0.2; // 4 pixels for a block width of 20
-        view.text = function(model, i) {
-          return 'foo ' + model.get('name')
+        view.text = function (model) {
+          return 'foo ' + model.get('name');
         };
         view.offsetText = -20;
         view.render();
@@ -251,12 +269,12 @@ function (InterleavedBar, Collection) {
         assertSegment(group2.select('g.segment:nth-child(3)'), { x: 52, y: -36, width: 6, height: 36, textX: 55, textY: -56, text: 'foo six' });
       });
 
-      it("renders a centre-aligned segment and text for each model in a single series with gaps between bars", function () {
+      it('renders a centre-aligned segment and text for each model in a single series with gaps between bars', function () {
         collection.pop();
         view.blockMarginFraction = 0.2; // 4 pixels for a block width of 20 - 2 pixels on each side
         view.barMarginFraction = 0.2; // 4 pixels for a block width of 20 - should be ignored as there are no gaps within blocks
-        view.text = function(model, i) {
-          return 'foo ' + model.get('name')
+        view.text = function (model) {
+          return 'foo ' + model.get('name');
         };
         view.offsetText = -20;
         view.render();
@@ -275,15 +293,15 @@ function (InterleavedBar, Collection) {
       });
     });
 
-    describe("onHover", function () {
+    describe('onHover', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         view.blockMarginFraction = 0;
         view.barMarginFraction = 0;
-        spyOn(collection, "selectItem");
+        spyOn(collection, 'selectItem');
       });
 
-      it("selects the closest item", function () {
+      it('selects the closest item', function () {
         view.onHover({ x: 9, y: 0 });
         expect(collection.selectItem.mostRecentCall.args).toEqual([0, 0]);
         view.onHover({ x: 11, y: 0 });
@@ -294,7 +312,7 @@ function (InterleavedBar, Collection) {
         expect(collection.selectItem.mostRecentCall.args).toEqual([0, 1]);
       });
 
-      it("optionally toggles selection when the new item is the currently selected item", function () {
+      it('optionally toggles selection when the new item is the currently selected item', function () {
         view.collection.selectedIndex = 0;
         view.collection.selectedItem = view.collection.at(0);
         view.collection.at(0).get('values').selectItem(0);
