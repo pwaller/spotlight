@@ -40,11 +40,11 @@ function (ModuleController, GroupedTimeseriesCollection, GroupedTimeshiftCollect
         duration: this.model.get('duration'),
         axisPeriod: this.model.get('axis-period'),
         axes: _.merge({
-          "x": {
-            "label": "Date",
-            "key": "_start_at"
+          'x': {
+            'label': 'Date',
+            'key': '_start_at'
           },
-          "y": []
+          'y': []
         }, this.model.get('axes'))
       };
     }

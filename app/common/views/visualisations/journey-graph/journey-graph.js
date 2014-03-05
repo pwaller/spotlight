@@ -23,11 +23,11 @@ function (Graph, XAxis, Bar, Callout, Hover) {
       return [];
     },
 
-    getXPos: function (groupIndex, modelIndex) {
+    getXPos: function () {
       return modelIndex;
     },
 
-    getYPos: function (groupIndex, modelIndex) {
+    getYPos: function () {
       return this.configs.overlay.getYPos.apply(this, arguments) || 0;
     },
 

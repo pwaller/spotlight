@@ -363,12 +363,12 @@ function (View, d3, XAxis, YAxis, YAxisRight, Line, Stack, LineLabel, Hover, Cal
             .values(function (group) {
               return group.get('values').models;
             })
-            .y(function (model, index) {
+            .y(function (model) {
               return model.get(valueAttr);
             });
 
-          if (this.isOneHundredPercent()){
-            stack.offset(function(data) {
+          if (this.isOneHundredPercent()) {
+            stack.offset(function (data) {
               var lineCount = data.length,
                   lineLength = data[0].length,
                   i, j, sumOfYValues, y0 = [];

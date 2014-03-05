@@ -11,7 +11,7 @@ function (Component) {
 
     // Not implemented; override in configuration or subclass
     getScale: function () {
-      throw('No scale defined.');
+      throw ('No scale defined.');
     },
 
     render: function () {
@@ -31,7 +31,7 @@ function (Component) {
       }, this);
 
       this.componentWrapper
-        .attr("transform", this.getTransform())
+        .attr('transform', this.getTransform())
         .call(axis);
 
       // re-order elements to ensure odd/even CSS logic behaves as expected
@@ -50,7 +50,7 @@ function (Component) {
         offsetY += this.graph.innerHeight;
       }
 
-      return "translate(" + offsetX + "," + offsetY + ")";
+      return 'translate(' + offsetX + ',' + offsetY + ')';
     }
 
   });

@@ -72,10 +72,10 @@ function (View, headTemplate, bodyEndTemplate, navigationTemplate, breadcrumbsTe
         {
           head: headTemplate(baseContext),
           bodyEnd: this.bodyEndTemplate(baseContext),
-          topOfPage: "",
+          topOfPage: '',
           pageTitle: this.getPageTitle(),
-          bodyClasses: "",
-          headerClass: "with-proposition",
+          bodyClasses: '',
+          headerClass: 'with-proposition',
           propositionHeader: navigationTemplate,
           cookieMessage: cookieMessageTemplate(),
           footerTop: footerTopTemplate(),

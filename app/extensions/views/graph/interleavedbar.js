@@ -2,7 +2,7 @@ define([
   'require',
   './component'
 ],
-function(require, Component) {
+function (require, Component) {
   /**
    * Renders multiple data series as blocks of 'interleaved' bars. Each block
    * contains one value from each series.
@@ -34,7 +34,7 @@ function(require, Component) {
       return 0;
     },
     
-    barWidth: function (group, groupIndex, model, index) {
+    barWidth: function () {
       var numGroups = this.collection.length;
       var numBarSpaces = numGroups - 1;
       var blockWidth = this.blockWidth.apply(this, arguments);
@@ -52,7 +52,7 @@ function(require, Component) {
           .data(this.collection.models);
       selection.exit().remove();
 
-      var enterSelection = selection.enter().append('g').attr('class', 'group');
+      selection.enter().append('g').attr('class', 'group');
       
       var that = this;
       selection.each(function (group, groupIndex) {

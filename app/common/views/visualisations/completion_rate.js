@@ -8,23 +8,23 @@ define([
 function (template, View, Tabs, VolumetricsNumberView, CompletionGraphView) {
   var CompletionRateView = View.extend({
     template: template,
-    
-    initialize: function (options) {
+
+    initialize: function () {
       View.prototype.initialize.apply(this, arguments);
 
       if (this.model && this.model.get('tabs')) {
-         this.views["#completion-nav"] = {
-           view: Tabs,
-           options: function (){
-             return {
-               model: this.collection.query,
-               attr: this.model.get('tabbed_attr'),
-               tabs: this.model.get('tabs')
-             };
-           }
-        };        
+        this.views['#completion-nav'] = {
+          view: Tabs,
+          options: function () {
+            return {
+              model: this.collection.query,
+              attr: this.model.get('tabbed_attr'),
+              tabs: this.model.get('tabs')
+            };
+          }
+        };
       }
-      
+
     },
 
     views: {

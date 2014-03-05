@@ -23,18 +23,16 @@ function (ModuleController, CompletionRateView, CompletionRateCollection) {
         denominatorMatcher: new RegExp(this.model.get('denominator-matcher')),
         matchingAttribute: this.model.get('matching-attribute'),
         tabbedAttr: this.model.get('tabbed_attr'),
-        axes: _.merge({
-          "x": {
-            "label": "Date of completion",
-            "key": "_start_at"
+        axis: _.merge({
+          'x': {
+            'label': 'Date of completion',
+            'key': '_start_at'
           },
-          "y": [
-            {
-              "label": "Completion percentage",
-              "key": "completion"
-            }
-          ]
-        }, this.model.get('axes'))
+          'y': {
+            'label': 'Completion percentage',
+            'key': 'completion'
+          }
+        }, this.model.get('axis'))
       };
     }
   });

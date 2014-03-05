@@ -19,14 +19,14 @@ function (ModuleController, VisitorsRealtimeView, ListCollection) {
         limit: this.model.get('numTwoMinPeriodsToQuery') || (((60 / 2) * 24) + 2),
         fetchOptions: { headers: { 'cache-control': 'max-age=120' } },
         axes: _.merge({
-          "x": {
-            "label": "Time",
-            "key": "_timestamp"
+          'x': {
+            'label': 'Time',
+            'key': '_timestamp'
           },
-          "y": [
+          'y': [
             {
-              "label": "Number of unique visitors",
-              "key": "unique_visitors"
+              'label': 'Number of unique visitors',
+              'key': 'unique_visitors'
             }
           ]
         }, this.model.get('axes'))

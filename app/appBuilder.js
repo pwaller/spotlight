@@ -7,13 +7,14 @@ define([
 function (express, fs, path, winston) {
 
   var appBuilder = {
-    getApp: function (environment, rootDir, require_base_url) {
+    getApp: function (environment, rootDir, requireBaseUrl) {
+      var app;
       app = express();
       app.disable('x-powered-by');
 
       app.configure(function () {
         app.set('environment', environment);
-        app.set('requirePath', require_base_url || '/app/');
+        app.set('requirePath', requireBaseUrl || '/app/');
         app.set('assetPath', global.config.assetPath);
         app.set('assetDigest', JSON.parse(fs.readFileSync(path.join(rootDir, 'public', 'asset-digest.json'), {encoding: 'utf8'})));
         app.set('backdropUrl', global.config.backdropUrl);
