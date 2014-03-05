@@ -3,7 +3,7 @@ var requirejs = require('requirejs');
 //Config for libraries accessible and require js
 var appConfig = requirejs('./config');
 appConfig.baseUrl = 'app/';
-appConfig.nodeRequire = Require;
+appConfig.nodeRequire = require;
 requirejs.config(appConfig);
 
 //Command line args
