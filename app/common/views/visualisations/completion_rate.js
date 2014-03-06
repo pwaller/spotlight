@@ -41,7 +41,7 @@ function (template, View, Tabs, VolumetricsNumberView, CompletionGraphView) {
       '#volumetrics-completion': {
         view: CompletionGraphView,
         options: {
-          valueAttr:'completion'
+          valueAttr: 'completion'
         }
       }
     }
