@@ -8,10 +8,10 @@ function (Headline, Query) {
       it('should initialize with a model', function () {
         var model = new Query();
         spyOn(model, 'on');
-        new Headline({
+        var headline = new Headline({
           model: model
         });
-        expect(model.on).toHaveBeenCalled();
+        expect(headline.model.on).toHaveBeenCalled();
       });
     });
 
