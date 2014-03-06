@@ -2,9 +2,10 @@ define([
   'express',
   'fs',
   'path',
-  'winston'
+  'winston',
+  'requirejs'
 ],
-function (express, fs, path, winston) {
+function (express, fs, path, winston, requirejs) {
 
   var appBuilder = {
     getApp: function (environment, rootDir, requireBaseUrl) {

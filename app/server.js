@@ -17,6 +17,7 @@ var backbone = require('backbone'),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 var $ = global.$ = backbone.$ = global.jQuery = require('jquery');
+
 $.support.cors = true;
 
 $.ajaxSettings.xhr = function () {
