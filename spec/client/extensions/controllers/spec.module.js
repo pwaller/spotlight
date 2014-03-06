@@ -6,7 +6,7 @@ function (ModuleController) {
   describe('ModuleController', function () {
 
     describe('viewOptions', function () {
-       
+
       describe('when isClient is true', function () {
 
         describe('and the derived el is present', function () {
