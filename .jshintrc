@@ -9,8 +9,7 @@
     "d3",
     "document",
     "config",
-    "GOVUK",
-    "requirejs"
+    "GOVUK"
   ],
 
   "node"          : true,
@@ -34,9 +33,9 @@
   "unused"        : true,
   "strict"        : false,
   "trailing"      : true,
-  "maxdepth"      : 3,
-  "maxstatements" : 15,
-  "maxcomplexity" : 7,
+  "maxdepth"      : 4,
+  "maxstatements" : 35,
+  "maxcomplexity" : 25,
 
   "asi"           : false,
   "boss"          : true,

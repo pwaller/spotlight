@@ -40,9 +40,9 @@
   "unused"        : true,
   "strict"        : false,
   "trailing"      : true,
-  "maxdepth"      : 3,
-  "maxstatements" : 40,
-  "maxcomplexity" : 7,
+  "maxdepth"      : 4,
+  "maxstatements" : 50,
+  "maxcomplexity" : 25,
 
   "asi"           : false,
   "boss"          : true,
