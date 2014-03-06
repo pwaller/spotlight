@@ -4,7 +4,7 @@ define([
 ],
 function (InterleavedBar, Collection) {
   describe('InterleavedBarComponent', function () {
-    
+
     var d3 = InterleavedBar.prototype.d3;
 
     var el, wrapper, collection, view;
@@ -66,7 +66,7 @@ function (InterleavedBar, Collection) {
         var rectY = v.y;
         var rectWidth = v.width;
         var rectHeight = v.height;
-        if (v.strokeWidth != null) {
+        if (v.strokeWidth !== undefined) {
           rectX += v.strokeWidth / 2;
           rectY += v.strokeWidth / 2;
           rectWidth -= v.strokeWidth;
@@ -102,12 +102,12 @@ function (InterleavedBar, Collection) {
           expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
           expect(d3.select(this).selectAll('text')[0].length).toEqual(0);
         });
-        
+
         var group1 = d3.select('g.group:nth-child(1)');
         assertSegment(group1.select('g.segment:nth-child(1)'), { x:  0, y:  -4, width: 10, height:  4 });
         assertSegment(group1.select('g.segment:nth-child(2)'), { x: 20, y: -10, width: 10, height: 10 });
         assertSegment(group1.select('g.segment:nth-child(3)'), { x: 40, y: -16, width: 10, height: 16 });
-        
+
         var group2 = d3.select('g.group:nth-child(2)');
         assertSegment(group2.select('g.segment:nth-child(1)'), { x: 10, y: -24, width: 10, height: 24 });
         assertSegment(group2.select('g.segment:nth-child(2)'), { x: 30, y: -30, width: 10, height: 30 });
@@ -178,12 +178,12 @@ function (InterleavedBar, Collection) {
           expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
           expect(d3.select(this).selectAll('text')[0].length).toEqual(0);
         });
-        
+
         var group1 = d3.select('g.group:nth-child(1)');
         assertSegment(group1.select('g.segment:nth-child(1)'), { strokeWidth: 2, x:  0, y:  -4, width: 10, height:  4 });
         assertSegment(group1.select('g.segment:nth-child(2)'), { strokeWidth: 2, x: 20, y: -10, width: 10, height: 10 });
         assertSegment(group1.select('g.segment:nth-child(3)'), { strokeWidth: 2, x: 40, y: -16, width: 10, height: 16 });
-        
+
         var group2 = d3.select('g.group:nth-child(2)');
         assertSegment(group2.select('g.segment:nth-child(1)'), { strokeWidth: 2, x: 10, y: -24, width: 10, height: 24 });
         assertSegment(group2.select('g.segment:nth-child(2)'), { strokeWidth: 2, x: 30, y: -30, width: 10, height: 30 });
@@ -203,12 +203,12 @@ function (InterleavedBar, Collection) {
           expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
           expect(d3.select(this).selectAll('text')[0].length).toEqual(0);
         });
-        
+
         var group1 = d3.select('g.group:nth-child(1)');
         assertSegment(group1.select('g.segment:nth-child(1)'), { x:  2, y:  -4, width: 8, height:  4 });
         assertSegment(group1.select('g.segment:nth-child(2)'), { x: 22, y: -10, width: 8, height: 10 });
         assertSegment(group1.select('g.segment:nth-child(3)'), { x: 42, y: -16, width: 8, height: 16 });
-        
+
         var group2 = d3.select('g.group:nth-child(2)');
         assertSegment(group2.select('g.segment:nth-child(1)'), { x: 10, y: -24, width: 8, height: 24 });
         assertSegment(group2.select('g.segment:nth-child(2)'), { x: 30, y: -30, width: 8, height: 30 });
@@ -228,12 +228,12 @@ function (InterleavedBar, Collection) {
           expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
           expect(d3.select(this).selectAll('text')[0].length).toEqual(0);
         });
-        
+
         var group1 = d3.select('g.group:nth-child(1)');
         assertSegment(group1.select('g.segment:nth-child(1)'), { x:  0, y:  -4, width: 8, height:  4 });
         assertSegment(group1.select('g.segment:nth-child(2)'), { x: 20, y: -10, width: 8, height: 10 });
         assertSegment(group1.select('g.segment:nth-child(3)'), { x: 40, y: -16, width: 8, height: 16 });
-        
+
         var group2 = d3.select('g.group:nth-child(2)');
         assertSegment(group2.select('g.segment:nth-child(1)'), { x: 12, y: -24, width: 8, height: 24 });
         assertSegment(group2.select('g.segment:nth-child(2)'), { x: 32, y: -30, width: 8, height: 30 });
@@ -257,12 +257,12 @@ function (InterleavedBar, Collection) {
           expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
           expect(d3.select(this).selectAll('text')[0].length).toEqual(1);
         });
-        
+
         var group1 = d3.select('g.group:nth-child(1)');
         assertSegment(group1.select('g.segment:nth-child(1)'), { x:  2, y:  -4, width: 6, height:  4, textX:  5, textY: -24, text: 'foo one' });
         assertSegment(group1.select('g.segment:nth-child(2)'), { x: 22, y: -10, width: 6, height: 10, textX: 25, textY: -30, text: 'foo two' });
         assertSegment(group1.select('g.segment:nth-child(3)'), { x: 42, y: -16, width: 6, height: 16, textX: 45, textY: -36, text: 'foo three' });
-        
+
         var group2 = d3.select('g.group:nth-child(2)');
         assertSegment(group2.select('g.segment:nth-child(1)'), { x: 12, y: -24, width: 6, height: 24, textX: 15, textY: -44, text: 'foo four' });
         assertSegment(group2.select('g.segment:nth-child(2)'), { x: 32, y: -30, width: 6, height: 30, textX: 35, textY: -50, text: 'foo five' });
@@ -285,7 +285,7 @@ function (InterleavedBar, Collection) {
         expect(segments.selectAll('rect')[0].length).toEqual(1);
         expect(segments.selectAll('line')[0].length).toEqual(1);
         expect(segments.selectAll('text')[0].length).toEqual(1);
-        
+
         var group1 = d3.select('g.group:nth-child(1)');
         assertSegment(group1.select('g.segment:nth-child(1)'), { x:  2, y:  -4, width: 16, height:  4, textX: 10, textY: -24, text: 'foo one' });
         assertSegment(group1.select('g.segment:nth-child(2)'), { x: 22, y: -10, width: 16, height: 10, textX: 30, textY: -30, text: 'foo two' });
