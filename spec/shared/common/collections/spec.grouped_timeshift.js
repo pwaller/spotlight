@@ -173,7 +173,7 @@ function (GroupedTimeshiftCollection, Query) {
       });
 
 
-    it("should parse response data", function(){
+    it('should parse response data', function(){
 
       var collection = new GroupedTimeshiftCollection([],{
         valueAttr: 'value',
@@ -211,7 +211,7 @@ function (GroupedTimeshiftCollection, Query) {
       expect(parsed).toEqual(expected);
     });
 
-    it("should cope if not all of the specified series are present in the response", function(){
+    it('should cope if not all of the specified series are present in the response', function(){
 
       var collection = new GroupedTimeshiftCollection([],{
         valueAttr: 'value',
@@ -255,7 +255,7 @@ function (GroupedTimeshiftCollection, Query) {
     });
 
 
-    it("should cope if none of the specified series are present in the response", function(){
+    it('should cope if none of the specified series are present in the response', function(){
 
       var collection = new GroupedTimeshiftCollection([],{
         valueAttr: 'value',
