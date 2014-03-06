@@ -24,7 +24,7 @@ function (View, HeadlineItemView, DeltaItemView, SparklineView, template) {
           timePeriodValue = 'day';
         }
         timePeriod = currentDate.diff(startDate, timePeriodValue);
-        timePeriodValue += (timePeriod > 1) ? "s" : "";
+        timePeriodValue += (timePeriod > 1) ? 's' : '';
       }
 
       return _.extend(
