@@ -24,7 +24,7 @@ function (View, SparklineView, template) {
       var events = '';
 
       if (isClient) {
-        events += "sync";
+        events += 'sync';
       }
 
       this.changeOnSelected = options.changeOnSelected || this.changeOnSelected;
