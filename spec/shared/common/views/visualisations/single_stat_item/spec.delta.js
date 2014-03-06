@@ -14,7 +14,7 @@ function (DeltaView, Model, Collection) {
         title: 'test',
         values: new Collection([
           {
-            _start_at: collection.getMoment("2012-09-01T00:00:00+00:00"),
+            _start_at: collection.getMoment('2012-09-01T00:00:00+00:00'),
             a: 1,
             b: 2,
             c: null,
@@ -22,7 +22,7 @@ function (DeltaView, Model, Collection) {
             e: 5
           },
           {
-            _start_at: collection.getMoment("2013-09-01T00:00:00+00:00"),
+            _start_at: collection.getMoment('2013-09-01T00:00:00+00:00'),
             a: 0.5,
             b: 4,
             c: 6,
@@ -90,7 +90,7 @@ function (DeltaView, Model, Collection) {
         title: 'test',
         values: new Collection([
           {
-            _start_at: collection.getMoment("2012-09-01T00:00:00+00:00"),
+            _start_at: collection.getMoment('2012-09-01T00:00:00+00:00'),
             a: 1,
             b: 2,
             c: null,
@@ -98,7 +98,7 @@ function (DeltaView, Model, Collection) {
             e: 5
           },
           {
-            _start_at: collection.getMoment("2013-09-01T00:00:00+00:00"),
+            _start_at: collection.getMoment('2013-09-01T00:00:00+00:00'),
             a: 0.9999999,
             b: 4,
             c: 6,
