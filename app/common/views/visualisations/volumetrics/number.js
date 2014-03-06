@@ -7,7 +7,7 @@ function (SingleStatView) {
     changeOnSelected: true,
     labelPrefix: '',
 
-    formatValue: function(value) {
+    formatValue: function (value) {
       return this.formatNumericLabel(value);
     },
 
