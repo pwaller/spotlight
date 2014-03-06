@@ -42,9 +42,9 @@ function (Component, Pivot) {
         //which manifests in grouped_timeseries displayed as stack.
         //it causes the total rather than the stack value to be displayed
         //when hovering to the right of the last value.
-        //in the case of stacked_graph this is not desired 
-        //(though we still want '(no data)' labels) 
-        //and so we show nothing if noTotal is true and the sum isn't null 
+        //in the case of stacked_graph this is not desired
+        //(though we still want '(no data)' labels)
+        //and so we show nothing if noTotal is true and the sum isn't null
         if (noData) {
           sum = null;
         } else if (this.noTotal) {
@@ -69,7 +69,7 @@ function (Component, Pivot) {
     },
 
     onChangeSelected: function (group, groupIndex, model, index) {
-      var unselected = model == null;
+      var unselected = model === null;
       var selection = this.componentWrapper.selectAll('text');
 
       if (unselected) {
@@ -79,12 +79,12 @@ function (Component, Pivot) {
 
       var value = this.getValue(group, groupIndex, model, index);
 
-      if (value == LABELS_OFF) {
+      if (value === LABELS_OFF) {
         selection.data([]).exit().remove();
         return;
       }
 
-      if (value == null) {
+      if (value === null) {
         value = this.formatMissingValue();
       } else {
         value = this.formatValue(value);
