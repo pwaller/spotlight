@@ -223,10 +223,10 @@ function (Backbone, SafeSync, DateFunctions, Model, Query, $, Mustache) {
 
         // normal sort behaviour, sorts by numbers or alphabetically
         if (typeof aVal === 'string') {
-            aVal = aVal.toLowerCase();
+          aVal = aVal.toLowerCase();
         }
         if (typeof bVal === 'string') {
-            bVal = bVal.toLowerCase();
+          bVal = bVal.toLowerCase();
         }
 
         if (aVal < bVal) {
@@ -235,7 +235,7 @@ function (Backbone, SafeSync, DateFunctions, Model, Query, $, Mustache) {
           res = 1;
         }
         if (descending) {
-            res *= -1;
+          res *= -1;
         }
         return res;
       };
