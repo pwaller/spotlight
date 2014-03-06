@@ -4,7 +4,7 @@ define([
 ],
   function (StackedBar, Collection) {
     describe('StackedBarComponent', function () {
-      
+
       describe('render', function () {
         var d3 = StackedBar.prototype.d3;
 
@@ -16,9 +16,9 @@ define([
             {
               testAttr: 'b',
               values: new Collection([
-                { a:1, b:2, name: 'one'},
-                { a:4, b:5, name: 'two'},
-                { a:7, b:8, name: 'three'}
+                { a: 1, b: 2, name: 'one'},
+                { a: 4, b: 5, name: 'two'},
+                { a: 7, b: 8, name: 'three'}
               ])
             },
             {
@@ -85,8 +85,8 @@ define([
             expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
             expect(d3.select(this).selectAll('text')[0].length).toEqual(0);
           });
-          
-          
+
+
           var group1 = d3.select('g.group:nth-child(1)');
           var segment1 = group1.select('g.segment:nth-child(1)');
           expect(segment1.select('rect').attr('x')).toEqual('-3');
@@ -131,8 +131,8 @@ define([
             expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
             expect(d3.select(this).selectAll('text')[0].length).toEqual(0);
           });
-          
-          
+
+
           var group1 = d3.select('g.group:nth-child(1)');
           var segment1 = group1.select('g.segment:nth-child(1)');
           expect(segment1.select('rect').attr('x')).toEqual('2');
@@ -177,8 +177,8 @@ define([
             expect(d3.select(this).selectAll('line')[0].length).toEqual(1);
             expect(d3.select(this).selectAll('text')[0].length).toEqual(0);
           });
-          
-          
+
+
           var group1 = d3.select('g.group:nth-child(1)');
           var segment1 = group1.select('g.segment:nth-child(1)');
           expect(segment1.select('rect').attr('x')).toEqual('-8');
