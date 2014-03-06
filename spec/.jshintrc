@@ -15,7 +15,8 @@
     "d3",
     "waitsFor",
     "runs",
-    "window"
+    "window",
+    "path"
   ],
 
   "node"          : true,
