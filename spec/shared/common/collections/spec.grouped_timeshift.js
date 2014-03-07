@@ -13,15 +13,15 @@ function (GroupedTimeshiftCollection, Query) {
         category: 'group',
         axes: {
           x: {
-            "label": "Date",
-            "key": "_start_at"
+            'label': 'Date',
+            'key': '_start_at'
           },
           y: [
             {
-              "label": "One",
-              "categoryId": "one",
-              "key": "value:sum",
-              "timeshift": 1
+              'label': 'One',
+              'categoryId': 'one',
+              'key': 'value:sum',
+              'timeshift': 1
             }
           ]
         }
@@ -57,27 +57,27 @@ function (GroupedTimeshiftCollection, Query) {
         period: 'week',
         axes: {
           x: {
-            "label": "Date",
-            "key": "_start_at"
+            'label': 'Date',
+            'key': '_start_at'
           },
           y: [
             {
-              "label": "One",
-              "categoryId": "one",
-              "key": "value:sum",
-              "timeshift": 4
+              'label': 'One',
+              'categoryId': 'one',
+              'key': 'value:sum',
+              'timeshift': 4
             },
             {
-              "label": "Two",
-              "categoryId": "two",
-              "key": "value:sum",
-              "timeshift": 5
+              'label': 'Two',
+              'categoryId': 'two',
+              'key': 'value:sum',
+              'timeshift': 5
             },
             {
-              "label": "Thr",
-              "categoryId": "thr",
-              "key": "value:sum",
-              "timeshift": 6
+              'label': 'Thr',
+              'categoryId': 'thr',
+              'key': 'value:sum',
+              'timeshift': 6
             }
           ]
         }
