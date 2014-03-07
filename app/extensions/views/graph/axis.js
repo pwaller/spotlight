@@ -24,7 +24,7 @@ function (Component) {
         .orient(this.orient);
 
       _.each(['ticks', 'tickValues', 'tickFormat', 'tickPadding', 'tickSize'], function (id) {
-        if (this[id] != null) {
+        if (this[id]) {
           var args = _.isFunction(this[id]) ? this[id]() : this[id];
           axis[id].apply(this, _.isArray(args) ? args : [args]);
         }
@@ -44,7 +44,7 @@ function (Component) {
       var offsetX = this.offsetX || 0;
       var offsetY = this.offsetY || 0;
 
-      if (this.position == 'right') {
+      if (this.position === 'right') {
         offsetX += this.graph.innerWidth;
       } else if (this.position === 'bottom') {
         offsetY += this.graph.innerHeight;
