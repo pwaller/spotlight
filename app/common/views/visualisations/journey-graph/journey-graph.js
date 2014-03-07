@@ -23,7 +23,7 @@ function (Graph, XAxis, Bar, Callout, Hover) {
       return [];
     },
 
-    getXPos: function () {
+    getXPos: function (groupIndex, modelIndex) {
       return modelIndex;
     },
 
@@ -41,8 +41,6 @@ function (Graph, XAxis, Bar, Callout, Hover) {
     },
 
     calcYScale: function () {
-      var collection = this.collection;
-      var d3 = this.d3;
       var max = this.collection.max(this.valueAttr) || 1;
       var yScale = this.d3.scale.linear();
       yScale.domain([0, max]);
