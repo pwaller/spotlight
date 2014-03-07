@@ -87,7 +87,7 @@ module.exports = function (grunt) {
       ],
       projectRoot: './spec/',
       options: {
-        specNameMatcher: 'spec\..*', // load only specs containing specNameMatcher
+        specNameMatcher: 'spec.*', // load only specs containing specNameMatcher
         match: '.*',
         useRequireJs: 'spec/requirejs-setup.js',
         forceExit: true,
