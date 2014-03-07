@@ -88,7 +88,7 @@ function (View, SparklineView, template) {
 
     templateContext: function () {
       var numberOfVisitors = null;
-      if (this.currentVisitors != null) {
+      if (this.currentVisitors) {
         numberOfVisitors = Math.round(this.currentVisitors);
       }
 

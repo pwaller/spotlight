@@ -94,7 +94,7 @@ function (Component) {
       var data = [],
           summary = '';
 
-      if (value === null && percentage == null) {
+      if (value === null && !percentage) {
         return '<span class="no-data">(no data)</span>';
       }
 
@@ -342,13 +342,13 @@ function (Component) {
         return groupIndexSelected === groupIndex;
       });
       labels.classed('not-selected', function (group, groupIndex) {
-        return groupIndexSelected != null && groupIndexSelected !== groupIndex;
+        return groupIndexSelected !== null && groupIndexSelected !== groupIndex;
       });
       lines.classed('selected', function (group, groupIndex) {
         return groupIndexSelected === groupIndex;
       });
       lines.classed('not-selected', function (group, groupIndex) {
-        return groupIndexSelected != null && groupIndexSelected !== groupIndex;
+        return groupIndexSelected !== null && groupIndexSelected !== groupIndex;
       });
     },
 
@@ -363,7 +363,7 @@ function (Component) {
           bestIndex = index;
         }
       });
-      if (e.toggle && bestIndex == this.collection.selectedIndex) {
+      if (e.toggle && bestIndex === this.collection.selectedIndex) {
         this.collection.selectItem(null);
       } else {
         this.collection.selectItem(bestIndex);
@@ -419,10 +419,10 @@ function (Component) {
         item = _.extend({}, item);
         item.index = index;
         item.min = Math.max(curMax, item.ideal);
-        if (item.absoluteLowestMin != null) {
+        if (_.isNumber(item.absoluteLowestMin)) {
           item.min = Math.max(item.min, item.absoluteLowestMin);
         }
-        if (item.absoluteHighestMin != null) {
+        if (_.isNumber(item.absoluteHighestMin)) {
           item.min = Math.min(item.min, item.absoluteHighestMin);
         }
         curMax = item.max = item.min + item.size;
@@ -443,10 +443,10 @@ function (Component) {
         var targetDist = anchor.dist * 0.9;
 
         anchor.min = anchor.ideal + targetDist;
-        if (anchor.absoluteLowestMin != null) {
+        if (_.isNumber(anchor.absoluteLowestMin)) {
           anchor.min = Math.max(anchor.min, anchor.absoluteLowestMin);
         }
-        if (anchor.absoluteHighestMin != null) {
+        if (_.isNumber(anchor.absoluteHighestMin)) {
           anchor.min = Math.min(anchor.min, anchor.absoluteHighestMin);
         }
         anchor.dist = anchor.min - anchor.ideal;
