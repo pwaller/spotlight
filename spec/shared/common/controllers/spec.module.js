@@ -18,7 +18,7 @@ function (ModuleController, Controller, ModuleView, RawView, StandaloneView) {
       it('uses a RawView when the query param raw is present', function () {
         jasmine.serverOnly(function () {
           var options = {
-            raw: ''
+            raw: 'rawData'
           };
           var moduleController = new ModuleController(options);
           expect(moduleController.viewClass).toBe(RawView);
