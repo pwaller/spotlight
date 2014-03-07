@@ -209,15 +209,15 @@ function (Backbone, SafeSync, DateFunctions, Model, Query, $, Mustache) {
         var res = 0;
 
         // special cases - nulls are always lower than an actual value
-        if (aVal == null && bVal == null) {
+        if (aVal === null && bVal === null) {
           // no point comparing two null values,
           // allow fallback to other comparator
           return null;
         }
-        else if (bVal == null) {
+        else if (bVal === null) {
           return -1;
         }
-        else if (aVal == null) {
+        else if (aVal === null) {
           return 1;
         }
 
@@ -251,7 +251,7 @@ function (Backbone, SafeSync, DateFunctions, Model, Query, $, Mustache) {
       if (index === this.selectedIndex) {
         return;
       }
-      var model = (index == null) ? null : this.models[index];
+      var model = (index === null) ? null : this.models[index];
       this.selectedItem = model;
       this.selectedIndex = index;
       if (!options || !options.silent) {
