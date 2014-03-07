@@ -71,7 +71,7 @@ function (View) {
     renderBody: function () {
       var keys = _.pluck(this.getColumns(), 'key');
       var $tbody = this.renderEl('tbody', this.$table);
-      _.each(this.collection.getTableRows(keys), function (row, rowIndex) {
+      _.each(this.collection.getTableRows(keys), function (row) {
 
         var $row = this.renderEl('tr', $tbody);
         var renderCell = this.renderCell.bind(this, 'td', $row);
