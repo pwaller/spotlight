@@ -58,7 +58,7 @@ function (Axis) {
       var ticks = this.componentWrapper.selectAll('.tick');
       ticks.classed('selected', false);
 
-      if (indexSelected != null) {
+      if (_.isNumber(indexSelected)) {
         d3.select(ticks[0][indexSelected]).classed('selected', true);
       }
     },
