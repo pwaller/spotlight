@@ -142,16 +142,16 @@ function (Table, View, $) {
       describe('getColumns', function () {
         it('returns an array of consolidated axes data', function () {
           expect(table.getColumns()).toEqual([
-                { key: 'timestamp', label: 'date' },
-                { key: 'value', label: 'another' },
-                { key: 'value', label: 'last' }
+              { key: 'timestamp', label: 'date' },
+              { key: 'value', label: 'another' },
+              { key: 'value', label: 'last' }
             ]);
         });
         it('filters columns based on y-axis keys', function () {
           table.collection.options.axes.y[1].key = 'differentKey';
           expect(table.getColumns()).toEqual([
-                { key: 'timestamp', label: 'date' },
-                { key: 'value', label: 'another' }
+              { key: 'timestamp', label: 'date' },
+              { key: 'value', label: 'another' }
             ]);
         });
       });
