@@ -11,7 +11,7 @@ function (InterleavedBar) {
       var x1 = this.scales.x(this.graph.getXPos(0, 1));
       return x1 - x0;
     },
-    text: function (model, i) {
+    text: function (model) {
       return this.formatNumericLabel(model.get(this.graph.valueAttr) || 0);
     }
   });
