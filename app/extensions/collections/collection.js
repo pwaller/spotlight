@@ -267,12 +267,15 @@ function (Backbone, SafeSync, DateFunctions, Model, Query, $, Mustache) {
     },
 
     getTableRows: function (keys) {
-      if (arguments.length !== 1 || !(_.isArray(keys))) {
-        keys = [].slice.apply(arguments);
-      }
       return this.map(function (model) {
         return _.map(keys, function (key) {
-          return model.get(key);
+          var value;
+          if (_.isArray(key)) {
+            value = _.map(key, model.get.bind(model));
+          } else {
+            value = model.get(key);
+          }
+          return value;
         });
       });
     }
