@@ -126,8 +126,13 @@ define([
       // uppercase first letter
       value = value.charAt(0).toUpperCase() + value.slice(1);
       return value;
-    }
+    },
 
+    url: function (value, options) {
+      _.defaults(options, {});
+
+      return '<a href="' + value + '">' + value + '</a>';
+    }
   };
 
   var utils = {
