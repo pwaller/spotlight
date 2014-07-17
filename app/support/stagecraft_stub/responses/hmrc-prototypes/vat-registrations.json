@@ -162,23 +162,23 @@
         "y": [
           {
             "label": "VAT registrations",
-            "categoryId": "new-registrations",
+            "groupId": "new-registrations",
             "format": "number"
           },
           {
             "label": "VAT deregistrations",
-            "categoryId": "de-registrations",
+            "groupId": "de-registrations",
             "format": "number"
           },
           {
             "label": "VAT registrations",
-            "categoryId": "new-registrations",
+            "groupId": "new-registrations",
             "timeshift": 12,
             "format": "number"
           },
           {
             "label": "VAT deregistrations",
-            "categoryId": "de-registrations",
+            "groupId": "de-registrations",
             "timeshift": 12,
             "format": "number"
           }
@@ -192,8 +192,6 @@
         "data-type": "registrations",
         "query-params": {
           "period": "month",
-          "start_at": "2013-04-01T01:00:00Z",
-          "end_at": "2014-04-01T01:00:00Z",
           "group_by": "registration_type",
           "collect": [
             "count:sum"
